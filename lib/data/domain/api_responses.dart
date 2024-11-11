@@ -1,0 +1,1514 @@
+// Models
+
+import 'package:ecommerce_app/domain/product.dart';
+
+class Address {
+  int? id;
+  String? name;
+  String? phone;
+  String? email;
+  String? country;
+  String? state;
+  String? city;
+  String? address;
+  String? zipCode;
+  bool? isDefault;
+
+  Address({
+    this.id,
+    this.name,
+    this.phone,
+    this.email,
+    this.country,
+    this.state,
+    this.city,
+    this.address,
+    this.zipCode,
+    this.isDefault,
+  });
+
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      phone: json['phone'] as String?,
+      email: json['email'] as String?,
+      country: json['country'] as String?,
+      state: json['state'] as String?,
+      city: json['city'] as String?,
+      address: json['address'] as String?,
+      zipCode: json['zip_code'] as String?,
+      isDefault: json['is_default'] as bool?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'country': country,
+      'state': state,
+      'city': city,
+      'address': address,
+      'zip_code': zipCode,
+      'is_default': isDefault,
+    };
+  }
+}
+
+class AddressRequest {
+  String? name;
+  String? email;
+  String? phone;
+  String? country;
+  String? state;
+  String? city;
+  String? address;
+  bool? isDefault;
+  String? zipCode;
+
+  AddressRequest({
+    this.name,
+    this.email,
+    this.phone,
+    this.country,
+    this.state,
+    this.city,
+    this.address,
+    this.isDefault,
+    this.zipCode,
+  });
+
+  factory AddressRequest.fromJson(Map<String, dynamic> json) {
+    return AddressRequest(
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      phone: json['phone'] as String?,
+      country: json['country'] as String?,
+      state: json['state'] as String?,
+      city: json['city'] as String?,
+      address: json['address'] as String?,
+      isDefault: json['is_default'] as bool?,
+      zipCode: json['zip_code'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'country': country,
+      'state': state,
+      'city': city,
+      'address': address,
+      'is_default': isDefault,
+      'zip_code': zipCode,
+    };
+  }
+}
+
+class AddressResponse {
+  bool? error;
+  Address? data;
+  String? message;
+
+  AddressResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory AddressResponse.fromJson(Map<String, dynamic> json) {
+    return AddressResponse(
+      error: json['error'] as bool?,
+      data: json['data'] != null ? Address.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class CountryResponse {
+  bool? error;
+  List<Country>? data;
+  String? message;
+
+  CountryResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory CountryResponse.fromJson(Map<String, dynamic> json) {
+    return CountryResponse(
+      error: json['error'] as bool?,
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Country.fromJson(e))
+          .toList(),
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.map((e) => e.toJson()).toList(),
+      'message': message,
+    };
+  }
+}
+
+class Country {
+  String? name;
+  String? code;
+
+  Country({
+    this.name,
+    this.code,
+  });
+
+  factory Country.fromJson(Map<String, dynamic> json) {
+    return Country(
+      name: json['name'] as String?,
+      code: json['code'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'code': code,
+    };
+  }
+}
+
+class BaseResponse {
+  bool? error;
+  dynamic data;
+  String? message;
+
+  BaseResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory BaseResponse.fromJson(Map<String, dynamic> json) {
+    return BaseResponse(
+      error: json['error'] as bool?,
+      data: json['data'],
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data,
+      'message': message,
+    };
+  }
+}
+
+class RegisterRequest {
+  String? firstName;
+  String? lastName;
+  String? name;
+  String? email;
+  String? password;
+  String? phone;
+  String? passwordConfirmation;
+
+  RegisterRequest({
+    this.firstName,
+    this.lastName,
+    this.name,
+    this.email,
+    this.password,
+    this.phone,
+    this.passwordConfirmation,
+  });
+
+  factory RegisterRequest.fromJson(Map<String, dynamic> json) {
+    return RegisterRequest(
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      password: json['password'] as String?,
+      phone: json['phone'] as String?,
+      passwordConfirmation: json['password_confirmation'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'first_name': firstName,
+      'last_name': lastName,
+      'name': name,
+      'email': email,
+      'password': password,
+      'phone': phone,
+      'password_confirmation': passwordConfirmation,
+    };
+  }
+}
+
+class LoginRequest {
+  String? email;
+  String? password;
+
+  LoginRequest({
+    this.email,
+    this.password,
+  });
+
+  factory LoginRequest.fromJson(Map<String, dynamic> json) {
+    return LoginRequest(
+      email: json['email'] as String?,
+      password: json['password'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+      'password': password,
+    };
+  }
+}
+
+class LoginResponse {
+  bool? error;
+  LoginData? data;
+  String? message;
+
+  LoginResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory LoginResponse.fromJson(Map<String, dynamic> json) {
+    return LoginResponse(
+      error: json['error'] as bool?,
+      data: json['data'] != null ? LoginData.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class LoginData {
+  String? token;
+
+  LoginData({
+    this.token,
+  });
+
+  factory LoginData.fromJson(Map<String, dynamic> json) {
+    return LoginData(
+      token: json['token'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'token': token,
+    };
+  }
+}
+
+class EmailCheckRequest {
+  String? email;
+
+  EmailCheckRequest({
+    this.email,
+  });
+
+  factory EmailCheckRequest.fromJson(Map<String, dynamic> json) {
+    return EmailCheckRequest(
+      email: json['email'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+    };
+  }
+}
+
+class EmailCheckResponse {
+  bool? error;
+  EmailCheckData? data;
+  String? message;
+
+  EmailCheckResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory EmailCheckResponse.fromJson(Map<String, dynamic> json) {
+    return EmailCheckResponse(
+      error: json['error'] as bool?,
+      data: json['data'] != null ? EmailCheckData.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class EmailCheckData {
+  bool? exists;
+
+  EmailCheckData({
+    this.exists,
+  });
+
+  factory EmailCheckData.fromJson(Map<String, dynamic> json) {
+    return EmailCheckData(
+      exists: json['exists'] as bool?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'exists': exists,
+    };
+  }
+}
+
+class ForgotPasswordRequest {
+  String? email;
+
+  ForgotPasswordRequest({
+    this.email,
+  });
+
+  factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) {
+    return ForgotPasswordRequest(
+      email: json['email'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+    };
+  }
+}
+
+class ResendVerificationRequest {
+  String? email;
+
+  ResendVerificationRequest({
+    this.email,
+  });
+
+  factory ResendVerificationRequest.fromJson(Map<String, dynamic> json) {
+    return ResendVerificationRequest(
+      email: json['email'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+    };
+  }
+}
+
+class SearchResponse {
+  bool? error;
+  List<Post>? data;
+  String? message;
+
+  SearchResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory SearchResponse.fromJson(Map<String, dynamic> json) {
+    return SearchResponse(
+      error: json['error'] as bool?,
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Post.fromJson(e))
+          .toList(),
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.map((e) => e.toJson()).toList(),
+      'message': message,
+    };
+  }
+}
+
+class PostListResponse {
+  List<Post>? data;
+  PaginationLinks? links;
+  PaginationMeta? meta;
+  bool? error;
+  String? message;
+
+  PostListResponse({
+    this.data,
+    this.links,
+    this.meta,
+    this.error,
+    this.message,
+  });
+
+  factory PostListResponse.fromJson(Map<String, dynamic> json) {
+    return PostListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Post.fromJson(e))
+          .toList(),
+      links: json['links'] != null
+          ? PaginationLinks.fromJson(json['links'])
+          : null,
+      meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'links': links?.toJson(),
+      'meta': meta?.toJson(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class Post {
+  int? id;
+  String? name;
+  String? slug;
+  String? description;
+  String? image;
+  List<Category>? categories;
+  List<Tag>? tags;
+  String? createdAt;
+  String? updatedAt;
+
+  Post({
+    this.id,
+    this.name,
+    this.slug,
+    this.description,
+    this.image,
+    this.categories,
+    this.tags,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      slug: json['slug'] as String?,
+      description: json['description'] as String?,
+      image: json['image'] as String?,
+      categories: (json['categories'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e))
+          .toList(),
+      tags: (json['tags'] as List<dynamic>?)
+          ?.map((e) => Tag.fromJson(e))
+          .toList(),
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'slug': slug,
+      'description': description,
+      'image': image,
+      'categories': categories?.map((e) => e.toJson()).toList(),
+      'tags': tags?.map((e) => e.toJson()).toList(),
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
+  }
+}
+
+class CategoryListResponse {
+  List<Category>? data;
+  PaginationLinks? links;
+  PaginationMeta? meta;
+  bool? error;
+  String? message;
+
+  CategoryListResponse({
+    this.data,
+    this.links,
+    this.meta,
+    this.error,
+    this.message,
+  });
+
+  factory CategoryListResponse.fromJson(Map<String, dynamic> json) {
+    return CategoryListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e))
+          .toList(),
+      links: json['links'] != null
+          ? PaginationLinks.fromJson(json['links'])
+          : null,
+      meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'links': links?.toJson(),
+      'meta': meta?.toJson(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class Category {
+  int? id;
+  String? name;
+  String? slug;
+  String? description;
+  List<Category>? children;
+  CategoryParent? parent;
+
+  Category({
+    this.id,
+    this.name,
+    this.slug,
+    this.description,
+    this.children,
+    this.parent,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      slug: json['slug'] as String?,
+      description: json['description'] as String?,
+      children: (json['children'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e))
+          .toList(),
+      parent: json['parent'] != null
+          ? CategoryParent.fromJson(json['parent'])
+          : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'slug': slug,
+      'description': description,
+      'children': children?.map((e) => e.toJson()).toList(),
+      'parent': parent?.toJson(),
+    };
+  }
+}
+
+class CategoryParent {
+  int? id;
+  String? name;
+  String? slug;
+  String? url;
+  String? description;
+
+  CategoryParent({
+    this.id,
+    this.name,
+    this.slug,
+    this.url,
+    this.description,
+  });
+
+  factory CategoryParent.fromJson(Map<String, dynamic> json) {
+    return CategoryParent(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      slug: json['slug'] as String?,
+      url: json['url'] as String?,
+      description: json['description'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'slug': slug,
+      'url': url,
+      'description': description,
+    };
+  }
+}
+
+class TagListResponse {
+  List<Tag>? data;
+  PaginationLinks? links;
+  PaginationMeta? meta;
+  bool? error;
+  String? message;
+
+  TagListResponse({
+    this.data,
+    this.links,
+    this.meta,
+    this.error,
+    this.message,
+  });
+
+  factory TagListResponse.fromJson(Map<String, dynamic> json) {
+    return TagListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Tag.fromJson(e))
+          .toList(),
+      links: json['links'] != null
+          ? PaginationLinks.fromJson(json['links'])
+          : null,
+      meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'links': links?.toJson(),
+      'meta': meta?.toJson(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class Tag {
+  int? id;
+  String? name;
+  String? slug;
+  String? description;
+
+  Tag({
+    this.id,
+    this.name,
+    this.slug,
+    this.description,
+  });
+
+  factory Tag.fromJson(Map<String, dynamic> json) {
+    return Tag(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      slug: json['slug'] as String?,
+      description: json['description'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'slug': slug,
+      'description': description,
+    };
+  }
+}
+
+class PostResponse {
+  bool? error;
+  Post? data;
+  String? message;
+
+  PostResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory PostResponse.fromJson(Map<String, dynamic> json) {
+    return PostResponse(
+      error: json['error'] as bool?,
+      data: json['data'] != null ? Post.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class BrandListResponse {
+  List<Brand>? data;
+  PaginationLinks? links;
+  PaginationMeta? meta;
+  bool? error;
+  String? message;
+
+  BrandListResponse({
+    this.data,
+    this.links,
+    this.meta,
+    this.error,
+    this.message,
+  });
+
+  factory BrandListResponse.fromJson(Map<String, dynamic> json) {
+    return BrandListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Brand.fromJson(e))
+          .toList(),
+      links: json['links'] != null
+          ? PaginationLinks.fromJson(json['links'])
+          : null,
+      meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'links': links?.toJson(),
+      'meta': meta?.toJson(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class Brand {
+  int? id;
+  String? slug;
+  String? name;
+  String? description;
+  String? image;
+
+  Brand({
+    this.id,
+    this.slug,
+    this.name,
+    this.description,
+    this.image,
+  });
+
+  factory Brand.fromJson(Map<String, dynamic> json) {
+    return Brand(
+      id: json['id'] as int?,
+      slug: json['slug'] as String?,
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      image: json['image'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'slug': slug,
+      'name': name,
+      'description': description,
+      'image': image,
+    };
+  }
+}
+
+class BrandResponse {
+  bool? error;
+  Brand? data;
+  String? message;
+
+  BrandResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory BrandResponse.fromJson(Map<String, dynamic> json) {
+    return BrandResponse(
+      error: json['error'] as bool?,
+      data: json['data'] != null ? Brand.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class ProductListResponse {
+  List<Product>? data;
+  PaginationLinks? links;
+  PaginationMeta? meta;
+  bool? error;
+  String? message;
+
+  ProductListResponse({
+    this.data,
+    this.links,
+    this.meta,
+    this.error,
+    this.message,
+  });
+
+  factory ProductListResponse.fromJson(Map<String, dynamic> json) {
+    return ProductListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Product.fromJson(e))
+          .toList(),
+      links: json['links'] != null
+          ? PaginationLinks.fromJson(json['links'])
+          : null,
+      meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'links': links?.toJson(),
+      'meta': meta?.toJson(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class CartRequest {
+  int? productId;
+  int? quantity;
+
+  CartRequest({
+    this.productId,
+    this.quantity,
+  });
+
+  factory CartRequest.fromJson(Map<String, dynamic> json) {
+    return CartRequest(
+      productId: json['product_id'] as int?,
+      quantity: json['quantity'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'product_id': productId,
+      'quantity': quantity,
+    };
+  }
+}
+
+class CartRefreshRequest {
+  List<CartItem>? products;
+
+  CartRefreshRequest({
+    this.products,
+  });
+
+  factory CartRefreshRequest.fromJson(Map<String, dynamic> json) {
+    return CartRefreshRequest(
+      products: (json['products'] as List<dynamic>?)
+          ?.map((e) => CartItem.fromJson(e))
+          .toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'products': products?.map((e) => e.toJson()).toList(),
+    };
+  }
+}
+
+class CartItem {
+  int? productId;
+  int? quantity;
+
+  CartItem({
+    this.productId,
+    this.quantity,
+  });
+
+  factory CartItem.fromJson(Map<String, dynamic> json) {
+    return CartItem(
+      productId: json['product_id'] as int?,
+      quantity: json['quantity'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'product_id': productId,
+      'quantity': quantity,
+    };
+  }
+}
+
+class OrderListResponse {
+  List<Order>? data;
+  PaginationLinks? links;
+  PaginationMeta? meta;
+  bool? error;
+  String? message;
+
+  OrderListResponse({
+    this.data,
+    this.links,
+    this.meta,
+    this.error,
+    this.message,
+  });
+
+  factory OrderListResponse.fromJson(Map<String, dynamic> json) {
+    return OrderListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Order.fromJson(e))
+          .toList(),
+      links: json['links'] != null
+          ? PaginationLinks.fromJson(json['links'])
+          : null,
+      meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'links': links?.toJson(),
+      'meta': meta?.toJson(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class Order {
+  // Define order fields here
+
+  Order();
+
+  factory Order.fromJson(Map<String, dynamic> json) {
+    return Order(
+        // Parse fields from json
+        );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      // Map fields to json
+    };
+  }
+}
+
+class ProductCategoryListResponse {
+  List<ProductCategory>? data;
+  bool? error;
+  String? message;
+
+  ProductCategoryListResponse({
+    this.data,
+    this.error,
+    this.message,
+  });
+
+  factory ProductCategoryListResponse.fromJson(Map<String, dynamic> json) {
+    return ProductCategoryListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => ProductCategory.fromJson(e))
+          .toList(),
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class ProductCategory {
+  int? id;
+  String? name;
+  String? icon;
+  String? iconImage;
+  int? isFeatured;
+  int? parentId;
+  String? slug;
+  ImageCategorySizes? imageWithSizes;
+
+  ProductCategory({
+    this.id,
+    this.name,
+    this.icon,
+    this.iconImage,
+    this.isFeatured,
+    this.parentId,
+    this.slug,
+    this.imageWithSizes,
+  });
+
+  factory ProductCategory.fromJson(Map<String, dynamic> json) {
+    return ProductCategory(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      icon: json['icon'] as String?,
+      iconImage: json['icon_image'] as String?,
+      isFeatured: json['is_featured'] as int?,
+      parentId: json['parent_id'] as int?,
+      slug: json['slug'] as String?,
+      imageWithSizes: json['image_with_sizes'] != null
+          ? ImageCategorySizes.fromJson(json['image_with_sizes'])
+          : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'icon': icon,
+      'icon_image': iconImage,
+      'is_featured': isFeatured,
+      'parent_id': parentId,
+      'slug': slug,
+      'image_with_sizes': imageWithSizes?.toJson(),
+    };
+  }
+}
+
+class ImageCategorySizes {
+  String? origin;
+  String? thumb;
+  String? medium;
+  String? small;
+
+  ImageCategorySizes({
+    this.origin,
+    this.thumb,
+    this.medium,
+    this.small,
+  });
+
+  factory ImageCategorySizes.fromJson(Map<String, dynamic> json) {
+    return ImageCategorySizes(
+      origin: json['origin'] as String?,
+      thumb: json['thumb'] as String?,
+      medium: json['medium'] as String?,
+      small: json['small'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'origin': origin,
+      'thumb': thumb,
+      'medium': medium,
+      'small': small,
+    };
+  }
+}
+
+class ProductCategoryResponse {
+  bool? error;
+  ProductCategory? data;
+  String? message;
+
+  ProductCategoryResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory ProductCategoryResponse.fromJson(Map<String, dynamic> json) {
+    return ProductCategoryResponse(
+      error: json['error'] as bool?,
+      data:
+          json['data'] != null ? ProductCategory.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class ProductResponse {
+  bool? error;
+  Product? data;
+  String? message;
+
+  ProductResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory ProductResponse.fromJson(Map<String, dynamic> json) {
+    return ProductResponse(
+      error: json['error'] as bool?,
+      data: json['data'] != null ? Product.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class ReviewListResponse {
+  List<Review>? data;
+  PaginationLinks? links;
+  PaginationMeta? meta;
+  bool? error;
+  String? message;
+
+  ReviewListResponse({
+    this.data,
+    this.links,
+    this.meta,
+    this.error,
+    this.message,
+  });
+
+  factory ReviewListResponse.fromJson(Map<String, dynamic> json) {
+    return ReviewListResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => Review.fromJson(e))
+          .toList(),
+      links: json['links'] != null
+          ? PaginationLinks.fromJson(json['links'])
+          : null,
+      meta: json['meta'] != null ? PaginationMeta.fromJson(json['meta']) : null,
+      error: json['error'] as bool?,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data?.map((e) => e.toJson()).toList(),
+      'links': links?.toJson(),
+      'meta': meta?.toJson(),
+      'error': error,
+      'message': message,
+    };
+  }
+}
+
+class Review {
+  // Define review fields here
+
+  Review();
+
+  factory Review.fromJson(Map<String, dynamic> json) {
+    return Review(
+        // Parse fields from json
+        );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      // Map fields to json
+    };
+  }
+}
+
+class UserProfileResponse {
+  bool? error;
+  UserProfile? data;
+  String? message;
+
+  UserProfileResponse({
+    this.error,
+    this.data,
+    this.message,
+  });
+
+  factory UserProfileResponse.fromJson(Map<String, dynamic> json) {
+    return UserProfileResponse(
+      error: json['error'] as bool?,
+      data: json['data'] != null ? UserProfile.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'error': error,
+      'data': data?.toJson(),
+      'message': message,
+    };
+  }
+}
+
+class UserProfile {
+  // Define user profile fields here
+
+  UserProfile();
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return UserProfile(
+        // Parse fields from json
+        );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      // Map fields to json
+    };
+  }
+}
+
+class UpdateProfileRequest {
+  String? firstName;
+  String? lastName;
+  String? name;
+  String? phone;
+  String? dob;
+  String? gender;
+  String? description;
+  String? email;
+
+  UpdateProfileRequest({
+    this.firstName,
+    this.lastName,
+    this.name,
+    this.phone,
+    this.dob,
+    this.gender,
+    this.description,
+    this.email,
+  });
+
+  factory UpdateProfileRequest.fromJson(Map<String, dynamic> json) {
+    return UpdateProfileRequest(
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
+      name: json['name'] as String?,
+      phone: json['phone'] as String?,
+      dob: json['dob'] as String?,
+      gender: json['gender'] as String?,
+      description: json['description'] as String?,
+      email: json['email'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'first_name': firstName,
+      'last_name': lastName,
+      'name': name,
+      'phone': phone,
+      'dob': dob,
+      'gender': gender,
+      'description': description,
+      'email': email,
+    };
+  }
+}
+
+class UpdatePasswordRequest {
+  String? password;
+
+  UpdatePasswordRequest({
+    this.password,
+  });
+
+  factory UpdatePasswordRequest.fromJson(Map<String, dynamic> json) {
+    return UpdatePasswordRequest(
+      password: json['password'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'password': password,
+    };
+  }
+}
+
+class PaginationLinks {
+  String? first;
+  String? last;
+  String? prev;
+  String? next;
+
+  PaginationLinks({
+    this.first,
+    this.last,
+    this.prev,
+    this.next,
+  });
+
+  factory PaginationLinks.fromJson(Map<String, dynamic> json) {
+    return PaginationLinks(
+      first: json['first'] as String?,
+      last: json['last'] as String?,
+      prev: json['prev'] as String?,
+      next: json['next'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'first': first,
+      'last': last,
+      'prev': prev,
+      'next': next,
+    };
+  }
+}
+
+class PaginationMeta {
+  int? currentPage;
+  int? from;
+  int? lastPage;
+  List<PaginationLink>? links;
+  String? path;
+  int? perPage;
+  int? to;
+  int? total;
+
+  PaginationMeta({
+    this.currentPage,
+    this.from,
+    this.lastPage,
+    this.links,
+    this.path,
+    this.perPage,
+    this.to,
+    this.total,
+  });
+
+  factory PaginationMeta.fromJson(Map<String, dynamic> json) {
+    return PaginationMeta(
+      currentPage: json['current_page'] as int?,
+      from: json['from'] as int?,
+      lastPage: json['last_page'] as int?,
+      links: (json['links'] as List<dynamic>?)
+          ?.map((e) => PaginationLink.fromJson(e))
+          .toList(),
+      path: json['path'] as String?,
+      perPage: json['per_page'] as int?,
+      to: json['to'] as int?,
+      total: json['total'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'current_page': currentPage,
+      'from': from,
+      'last_page': lastPage,
+      'links': links?.map((e) => e.toJson()).toList(),
+      'path': path,
+      'per_page': perPage,
+      'to': to,
+      'total': total,
+    };
+  }
+}
+
+class PaginationLink {
+  String? url;
+  String? label;
+  bool? active;
+
+  PaginationLink({
+    this.url,
+    this.label,
+    this.active,
+  });
+
+  factory PaginationLink.fromJson(Map<String, dynamic> json) {
+    return PaginationLink(
+      url: json['url'] as String?,
+      label: json['label'] as String?,
+      active: json['active'] as bool?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'url': url,
+      'label': label,
+      'active': active,
+    };
+  }
+}

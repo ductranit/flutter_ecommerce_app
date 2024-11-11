@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/app/modules/base/bindings/service_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,18 +27,20 @@ Future<void> main() async {
           title: "E-commerce App",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
-          builder: (context,widget) {
+          builder: (context, widget) {
             bool themeIsLight = MySharedPref.getThemeIsLight();
             return Theme(
               data: MyTheme.getThemeData(isLight: themeIsLight),
               child: MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                data: MediaQuery.of(context),
                 child: widget!,
               ),
             );
           },
-          initialRoute: AppPages.INITIAL, // first screen to show when app is running
+          initialRoute:
+              AppPages.INITIAL, // first screen to show when app is running
           getPages: AppPages.routes, // app screens
+          initialBinding: ServiceBinding(),
         );
       },
     ),
