@@ -9,8 +9,8 @@ import '../../../components/screen_title.dart';
 import '../controllers/favorites_controller.dart';
 
 class FavoritesView extends GetView<FavoritesController> {
-  const FavoritesView({Key? key}) : super(key: key);
-  
+  const FavoritesView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,21 +26,21 @@ class FavoritesView extends GetView<FavoritesController> {
             20.verticalSpace,
             GetBuilder<FavoritesController>(
               builder: (_) => controller.products.isEmpty
-                ? const NoData(text: 'No Products in Favorite Yet!')
-                : GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15.w,
-                      mainAxisSpacing: 15.h,
-                      mainAxisExtent: 260.h,
+                  ? const NoData(text: 'No Products in Favorite Yet!')
+                  : GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 15.w,
+                        mainAxisSpacing: 15.h,
+                        mainAxisExtent: 260.h,
+                      ),
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: controller.products.length,
+                      itemBuilder: (context, index) => ProductItem(
+                        product: controller.products[index],
+                      ),
                     ),
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: controller.products.length,
-                    itemBuilder: (context, index) => ProductItem(
-                      product: controller.products[index],
-                    ),
-                  ),
             ),
             10.verticalSpace,
           ],

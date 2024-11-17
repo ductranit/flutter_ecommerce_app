@@ -64,23 +64,23 @@ class BaseView extends GetView<BaseController> {
               selectedFontSize: 0.0,
               items: [
                 _mBottomNavItem(
-                  label: 'Home',
+                  label: 'Home'.tr,
                   icon: Constants.homeIcon,
                 ),
                 _mBottomNavItem(
-                  label: 'Favorites',
+                  label: 'Favorites'.tr,
                   icon: Constants.favoritesIcon,
                 ),
                 _mBottomNavItem(
-                  label: 'Cart',
+                  label: 'Cart'.tr,
                   icon: Constants.cartIcon,
                 ),
                 _mBottomNavItem(
-                  label: 'Notifications',
+                  label: 'Notifications'.tr,
                   icon: Constants.notificationsIcon,
                 ),
                 _mBottomNavItem(
-                  label: 'Settings',
+                  label: 'Settings'.tr,
                   icon: Constants.settingsIcon,
                 ),
               ],

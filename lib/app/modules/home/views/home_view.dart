@@ -17,8 +17,8 @@ class HomeView extends GetView<HomeController> {
         child: Obx(() => ListView(
               children: [
                 30.verticalSpace,
-                const ScreenTitle(
-                  title: 'Home',
+                ScreenTitle(
+                  title: 'Home'.tr,
                 ),
                 20.verticalSpace,
                 GridView.builder(

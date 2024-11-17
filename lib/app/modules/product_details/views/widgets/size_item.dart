@@ -7,11 +7,11 @@ class SizeItem extends StatelessWidget {
   final String label;
   final bool selected;
   const SizeItem({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.label,
     this.selected = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,25 +22,26 @@ class SizeItem extends StatelessWidget {
         width: 30.w,
         height: 30.h,
         decoration: BoxDecoration(
-          color: selected ? theme.primaryColor : theme.colorScheme.background,
+          color: selected ? theme.primaryColor : theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(12.r),
-          boxShadow: !selected ? null : [
-            BoxShadow(
-              color: const Color(0xFF0FDA89).withOpacity(0.3),
-              blurRadius: 4,
-              spreadRadius: 0,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          boxShadow: !selected
+              ? null
+              : [
+                  BoxShadow(
+                    color: const Color(0xFF0FDA89).withOpacity(0.3),
+                    blurRadius: 4,
+                    spreadRadius: 0,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
         ),
         child: Center(
           child: Text(
             label,
             style: theme.textTheme.displaySmall?.copyWith(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-              color: selected ? Colors.white : null
-            ),
+                fontSize: 12.sp,
+                fontWeight: FontWeight.bold,
+                color: selected ? Colors.white : null),
           ),
         ),
       ),

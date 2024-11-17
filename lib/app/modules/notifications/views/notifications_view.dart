@@ -9,8 +9,8 @@ import '../controllers/notifications_controller.dart';
 import 'widgets/notification_item.dart';
 
 class NotificationsView extends GetView<NotificationsController> {
-  const NotificationsView({Key? key}) : super(key: key);
-  
+  const NotificationsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +26,12 @@ class NotificationsView extends GetView<NotificationsController> {
             10.verticalSpace,
             ListView.builder(
               itemCount: 5,
-              itemBuilder: (context, index) => const NotificationItem()
-                .animate().fade().slideY(
-                  duration: const Duration(milliseconds: 300),
-                  begin: 1,
-                  curve: Curves.easeInSine,
-                ),
+              itemBuilder: (context, index) =>
+                  const NotificationItem().animate().fade().slideY(
+                        duration: const Duration(milliseconds: 300),
+                        begin: 1,
+                        curve: Curves.easeInSine,
+                      ),
               shrinkWrap: true,
               primary: false,
             ),
