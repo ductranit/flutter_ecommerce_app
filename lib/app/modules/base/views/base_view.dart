@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/app/modules/categories/views/categories_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,6 @@ import '../controllers/base_controller.dart';
 import '../../cart/views/cart_view.dart';
 import '../../favorites/views/favorites_view.dart';
 import '../../home/views/home_view.dart';
-import '../../notifications/views/notifications_view.dart';
 import '../../settings/views/settings_view.dart';
 
 class BaseView extends GetView<BaseController> {
@@ -28,7 +28,7 @@ class BaseView extends GetView<BaseController> {
               HomeView(),
               FavoritesView(),
               CartView(),
-              NotificationsView(),
+              CaetgoriesView(),
               SettingsView()
             ],
           ),
@@ -66,22 +66,26 @@ class BaseView extends GetView<BaseController> {
                 _mBottomNavItem(
                   label: 'Home'.tr,
                   icon: Constants.homeIcon,
+                  iconData: Icons.store,
                 ),
                 _mBottomNavItem(
                   label: 'Favorites'.tr,
                   icon: Constants.favoritesIcon,
+                  iconData: Icons.favorite,
                 ),
                 _mBottomNavItem(
                   label: 'Cart'.tr,
                   icon: Constants.cartIcon,
+                  iconData: Icons.shopping_cart,
                 ),
                 _mBottomNavItem(
-                  label: 'Notifications'.tr,
-                  icon: Constants.notificationsIcon,
-                ),
+                    label: 'Categories'.tr,
+                    icon: Constants.categoriesIcon,
+                    iconData: Icons.category),
                 _mBottomNavItem(
                   label: 'Settings'.tr,
                   icon: Constants.settingsIcon,
+                  iconData: Icons.settings,
                 ),
               ],
               onTap: controller.changeScreen,
@@ -92,11 +96,18 @@ class BaseView extends GetView<BaseController> {
     );
   }
 
-  _mBottomNavItem({required String label, required String icon}) {
+  _mBottomNavItem(
+      {required String label, required String icon, IconData? iconData}) {
+    final iconWidget = iconData != null
+        ? UniversalImage.icon(iconData, color: Get.theme.iconTheme.color)
+        : UniversalImage(icon, color: Get.theme.iconTheme.color);
+    final activeIcon = iconData != null
+        ? UniversalImage.icon(iconData, color: Get.theme.primaryColor)
+        : UniversalImage(icon, color: Get.theme.primaryColor);
     return BottomNavigationBarItem(
       label: label,
-      icon: UniversalImage(icon, color: Get.theme.iconTheme.color),
-      activeIcon: UniversalImage(icon, color: Get.theme.primaryColor),
+      icon: iconWidget,
+      activeIcon: activeIcon,
     );
   }
 }

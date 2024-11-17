@@ -23,6 +23,7 @@ abstract class _Paths {
   static const FAVORITES = '/favorites';
   static const CART = '/cart';
   static const NOTIFICATIONS = '/notifications';
+  static const CATEGORIES = '/categories';
   static const SETTINGS = '/settings';
   static const PRODUCT_DETAILS = '/product-details';
 }

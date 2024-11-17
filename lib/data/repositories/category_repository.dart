@@ -5,8 +5,8 @@ import '../services/rest_client.dart';
 
 class CategoryRepository {
   final restClient = Get.find<RestClient>();
-  Future<List<Category>> getAllCategories() async {
-    final response = await restClient.getCategories();
+  Future<List<ProductCategory>> getAllCategories() async {
+    final response = await restClient.getProductCategories({});
     return response.data ?? [];
   }
 }

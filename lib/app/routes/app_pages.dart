@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/app/modules/categories/bindings/categories_binding.dart';
+import 'package:ecommerce_app/app/modules/categories/views/categories_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/base/bindings/base_binding.dart';
@@ -55,6 +57,11 @@ class AppPages {
       name: _Paths.NOTIFICATIONS,
       page: () => const NotificationsView(),
       binding: NotificationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CATEGORIES,
+      page: () => const CaetgoriesView(),
+      binding: CategoriesBinding(),
     ),
     GetPage(
       name: _Paths.SETTINGS,

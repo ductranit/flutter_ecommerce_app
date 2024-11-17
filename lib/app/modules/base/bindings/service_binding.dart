@@ -4,6 +4,7 @@ import 'package:ecommerce_app/data/repositories/category_repository.dart';
 import 'package:ecommerce_app/data/repositories/product_repository.dart';
 import 'package:ecommerce_app/data/services/rest_client.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class ServiceBinding extends Bindings {
   @override
@@ -11,5 +12,6 @@ class ServiceBinding extends Bindings {
     Get.lazyPut<RestClient>(() => RestClient(Dio(), baseUrl: baseUrl));
     Get.lazyPut<ProductRepository>(() => ProductRepository());
     Get.lazyPut<CategoryRepository>(() => CategoryRepository());
+    Get.lazyPut<Logger>(() => Logger());
   }
 }

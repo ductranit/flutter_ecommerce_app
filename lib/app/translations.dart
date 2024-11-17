@@ -9,6 +9,7 @@ class AppTranslations extends Translations {
           'Favorites': 'Favorites',
           'Notifications': 'Notifications',
           'Settings': 'Settings',
+          'Categories': 'Categories',
         },
       };
 }
