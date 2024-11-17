@@ -7,6 +7,7 @@ class ProductModel {
   int? quantity;
   double? price;
   String? size;
+  String? description;
   bool isFavorite = false;
   ProductModel(
       {this.id,
@@ -15,6 +16,7 @@ class ProductModel {
       this.quantity,
       this.price,
       this.size,
+      this.description,
       this.isFavorite = false});
 
   ProductModel.from(Product product) {
@@ -24,5 +26,6 @@ class ProductModel {
     price = product.price;
     image = product.imageUrl;
     size = 'M';
+    description = product.description;
   }
 }

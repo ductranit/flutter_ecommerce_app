@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
@@ -27,7 +28,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 450.h,
+                    height: 400.h,
                     decoration: BoxDecoration(
                       color: const Color(0xFFEDF1FA),
                       borderRadius: BorderRadius.only(
@@ -35,6 +36,30 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         bottomRight: Radius.circular(30.r),
                       ),
                     ),
+                  ),
+                  Positioned(
+                    child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 25.h),
+                        height: 450,
+                        alignment: Alignment.center,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(
+                                30.r), // Adjust the radius as needed
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: UniversalImage(
+                            controller.product.image!,
+                            height: 400.h,
+                            fit: BoxFit.contain,
+                          ).animate().slideX(
+                                duration: const Duration(milliseconds: 300),
+                                begin: 1,
+                                curve: Curves.easeInSine,
+                              ),
+                        )),
                   ),
                   Positioned(
                     top: 30.h,
@@ -69,18 +94,6 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         ),
                       ],
                     ),
-                  ),
-                  Positioned(
-                    right: controller.product.id == 2 ? 0 : 30.w,
-                    bottom: -350.h,
-                    child: UniversalImage(
-                      controller.product.image!,
-                      height: 700.h,
-                    ).animate().slideX(
-                          duration: const Duration(milliseconds: 300),
-                          begin: 1,
-                          curve: Curves.easeInSine,
-                        ),
                   ),
                 ],
               ),
@@ -165,6 +178,10 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         curve: Curves.easeInSine,
                       ),
                 ),
+              ),
+              20.verticalSpace,
+              Html(
+                data: controller.product.description ?? '',
               ),
               20.verticalSpace,
               Padding(
