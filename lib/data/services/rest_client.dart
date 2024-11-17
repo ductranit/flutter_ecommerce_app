@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/data/configs.dart';
 import 'package:ecommerce_app/data/domain/api_responses.dart';
+import 'package:ecommerce_app/domain/address.dart';
 import 'package:retrofit/retrofit.dart';
 part 'rest_client.g.dart';
 

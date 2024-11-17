@@ -3,8 +3,8 @@ import 'package:ecommerce_app/domain/product.dart';
 import 'package:get/get.dart';
 
 class ProductRepository {
+  final restClient = Get.find<RestClient>();
   Future<List<Product>> getProducts() async {
-    final restClient = Get.find<RestClient>();
     final response = await restClient.getProducts({});
     return response.data ?? [];
   }

@@ -1,62 +1,14 @@
 // Models
 
+import 'package:ecommerce_app/domain/address.dart';
+import 'package:ecommerce_app/domain/brand.dart';
+import 'package:ecommerce_app/domain/category.dart';
+import 'package:ecommerce_app/domain/country.dart';
+import 'package:ecommerce_app/domain/order.dart';
+import 'package:ecommerce_app/domain/post.dart';
 import 'package:ecommerce_app/domain/product.dart';
-
-class Address {
-  int? id;
-  String? name;
-  String? phone;
-  String? email;
-  String? country;
-  String? state;
-  String? city;
-  String? address;
-  String? zipCode;
-  bool? isDefault;
-
-  Address({
-    this.id,
-    this.name,
-    this.phone,
-    this.email,
-    this.country,
-    this.state,
-    this.city,
-    this.address,
-    this.zipCode,
-    this.isDefault,
-  });
-
-  factory Address.fromJson(Map<String, dynamic> json) {
-    return Address(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      phone: json['phone'] as String?,
-      email: json['email'] as String?,
-      country: json['country'] as String?,
-      state: json['state'] as String?,
-      city: json['city'] as String?,
-      address: json['address'] as String?,
-      zipCode: json['zip_code'] as String?,
-      isDefault: json['is_default'] as bool?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'phone': phone,
-      'email': email,
-      'country': country,
-      'state': state,
-      'city': city,
-      'address': address,
-      'zip_code': zipCode,
-      'is_default': isDefault,
-    };
-  }
-}
+import 'package:ecommerce_app/domain/tag.dart';
+import 'package:ecommerce_app/domain/user.dart';
 
 class AddressRequest {
   String? name;
@@ -164,30 +116,6 @@ class CountryResponse {
       'error': error,
       'data': data?.map((e) => e.toJson()).toList(),
       'message': message,
-    };
-  }
-}
-
-class Country {
-  String? name;
-  String? code;
-
-  Country({
-    this.name,
-    this.code,
-  });
-
-  factory Country.fromJson(Map<String, dynamic> json) {
-    return Country(
-      name: json['name'] as String?,
-      code: json['code'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'code': code,
     };
   }
 }
@@ -514,62 +442,6 @@ class PostListResponse {
   }
 }
 
-class Post {
-  int? id;
-  String? name;
-  String? slug;
-  String? description;
-  String? image;
-  List<Category>? categories;
-  List<Tag>? tags;
-  String? createdAt;
-  String? updatedAt;
-
-  Post({
-    this.id,
-    this.name,
-    this.slug,
-    this.description,
-    this.image,
-    this.categories,
-    this.tags,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      slug: json['slug'] as String?,
-      description: json['description'] as String?,
-      image: json['image'] as String?,
-      categories: (json['categories'] as List<dynamic>?)
-          ?.map((e) => Category.fromJson(e))
-          .toList(),
-      tags: (json['tags'] as List<dynamic>?)
-          ?.map((e) => Tag.fromJson(e))
-          .toList(),
-      createdAt: json['created_at'] as String?,
-      updatedAt: json['updated_at'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'slug': slug,
-      'description': description,
-      'image': image,
-      'categories': categories?.map((e) => e.toJson()).toList(),
-      'tags': tags?.map((e) => e.toJson()).toList(),
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
-  }
-}
-
 class CategoryListResponse {
   List<Category>? data;
   PaginationLinks? links;
@@ -610,86 +482,6 @@ class CategoryListResponse {
   }
 }
 
-class Category {
-  int? id;
-  String? name;
-  String? slug;
-  String? description;
-  List<Category>? children;
-  CategoryParent? parent;
-
-  Category({
-    this.id,
-    this.name,
-    this.slug,
-    this.description,
-    this.children,
-    this.parent,
-  });
-
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      slug: json['slug'] as String?,
-      description: json['description'] as String?,
-      children: (json['children'] as List<dynamic>?)
-          ?.map((e) => Category.fromJson(e))
-          .toList(),
-      parent: json['parent'] != null
-          ? CategoryParent.fromJson(json['parent'])
-          : null,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'slug': slug,
-      'description': description,
-      'children': children?.map((e) => e.toJson()).toList(),
-      'parent': parent?.toJson(),
-    };
-  }
-}
-
-class CategoryParent {
-  int? id;
-  String? name;
-  String? slug;
-  String? url;
-  String? description;
-
-  CategoryParent({
-    this.id,
-    this.name,
-    this.slug,
-    this.url,
-    this.description,
-  });
-
-  factory CategoryParent.fromJson(Map<String, dynamic> json) {
-    return CategoryParent(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      slug: json['slug'] as String?,
-      url: json['url'] as String?,
-      description: json['description'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'slug': slug,
-      'url': url,
-      'description': description,
-    };
-  }
-}
-
 class TagListResponse {
   List<Tag>? data;
   PaginationLinks? links;
@@ -726,38 +518,6 @@ class TagListResponse {
       'meta': meta?.toJson(),
       'error': error,
       'message': message,
-    };
-  }
-}
-
-class Tag {
-  int? id;
-  String? name;
-  String? slug;
-  String? description;
-
-  Tag({
-    this.id,
-    this.name,
-    this.slug,
-    this.description,
-  });
-
-  factory Tag.fromJson(Map<String, dynamic> json) {
-    return Tag(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      slug: json['slug'] as String?,
-      description: json['description'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'slug': slug,
-      'description': description,
     };
   }
 }
@@ -826,42 +586,6 @@ class BrandListResponse {
       'meta': meta?.toJson(),
       'error': error,
       'message': message,
-    };
-  }
-}
-
-class Brand {
-  int? id;
-  String? slug;
-  String? name;
-  String? description;
-  String? image;
-
-  Brand({
-    this.id,
-    this.slug,
-    this.name,
-    this.description,
-    this.image,
-  });
-
-  factory Brand.fromJson(Map<String, dynamic> json) {
-    return Brand(
-      id: json['id'] as int?,
-      slug: json['slug'] as String?,
-      name: json['name'] as String?,
-      description: json['description'] as String?,
-      image: json['image'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'slug': slug,
-      'name': name,
-      'description': description,
-      'image': image,
     };
   }
 }
@@ -1040,24 +764,6 @@ class OrderListResponse {
       'meta': meta?.toJson(),
       'error': error,
       'message': message,
-    };
-  }
-}
-
-class Order {
-  // Define order fields here
-
-  Order();
-
-  factory Order.fromJson(Map<String, dynamic> json) {
-    return Order(
-        // Parse fields from json
-        );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      // Map fields to json
     };
   }
 }
@@ -1313,24 +1019,6 @@ class UserProfileResponse {
       'error': error,
       'data': data?.toJson(),
       'message': message,
-    };
-  }
-}
-
-class UserProfile {
-  // Define user profile fields here
-
-  UserProfile();
-
-  factory UserProfile.fromJson(Map<String, dynamic> json) {
-    return UserProfile(
-        // Parse fields from json
-        );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      // Map fields to json
     };
   }
 }

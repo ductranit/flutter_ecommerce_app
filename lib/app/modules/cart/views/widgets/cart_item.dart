@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:universal_image/universal_image.dart';
 
 import '../../../../../utils/constants.dart';
 import '../../../../data/models/product_model.dart';
@@ -10,9 +10,9 @@ import '../../controllers/cart_controller.dart';
 class CartItem extends GetView<CartController> {
   final ProductModel product;
   const CartItem({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class CartItem extends GetView<CartController> {
                 Positioned(
                   left: 15.w,
                   bottom: -150.h,
-                  child: Image.asset(
+                  child: UniversalImage(
                     product.image!,
                     height: 250.h,
                   ),
@@ -53,11 +53,15 @@ class CartItem extends GetView<CartController> {
                 overflow: TextOverflow.ellipsis,
               ),
               5.verticalSpace,
-              Text('Size: ${product.size}', style: theme.textTheme.bodyMedium?.copyWith(fontSize: 16.sp)),
+              Text('Size: ${product.size}',
+                  style: theme.textTheme.bodyMedium?.copyWith(fontSize: 16.sp)),
               5.verticalSpace,
-              Text('\$${product.price}', style: theme.textTheme.displayLarge?.copyWith(
-                fontSize: 18.sp,
-              ),),
+              Text(
+                '\$${product.price}',
+                style: theme.textTheme.displayLarge?.copyWith(
+                  fontSize: 18.sp,
+                ),
+              ),
               10.verticalSpace,
               GetBuilder<CartController>(
                 id: 'ProductQuantity',
@@ -66,14 +70,15 @@ class CartItem extends GetView<CartController> {
                   children: [
                     GestureDetector(
                       onTap: () => controller.onIncreasePressed(product.id!),
-                      child: SvgPicture.asset(Constants.decreaseIcon),
+                      child: UniversalImage(Constants.decreaseIcon),
                     ),
                     10.horizontalSpace,
-                    Text('${product.quantity}', style: theme.textTheme.displaySmall),
+                    Text('${product.quantity}',
+                        style: theme.textTheme.displaySmall),
                     10.horizontalSpace,
                     GestureDetector(
                       onTap: () => controller.onDecreasePressed(product.id!),
-                      child: SvgPicture.asset(Constants.increaseIcon),
+                      child: UniversalImage(Constants.increaseIcon),
                     ),
                   ],
                 ),
@@ -86,7 +91,7 @@ class CartItem extends GetView<CartController> {
             customBorder: const CircleBorder(),
             child: Container(
               padding: EdgeInsets.all(10.r),
-              child: SvgPicture.asset(
+              child: UniversalImage(
                 Constants.cancelIcon,
                 width: 20.w,
                 height: 20.h,

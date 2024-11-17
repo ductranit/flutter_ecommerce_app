@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:universal_image/universal_image.dart';
 
 import '../../../../utils/constants.dart';
 import '../../../components/custom_button.dart';
@@ -12,7 +12,7 @@ import 'widgets/rounded_button.dart';
 import 'widgets/size_item.dart';
 
 class ProductDetailsView extends GetView<ProductDetailsController> {
-  const ProductDetailsView({Key? key}) : super(key: key);
+  const ProductDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,24 +45,24 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                       children: [
                         RoundedButton(
                           onPressed: () => Get.back(),
-                          child: SvgPicture.asset(
-                            Constants.backArrowIcon,
-                            fit: BoxFit.none
-                          ),
+                          child: UniversalImage(Constants.backArrowIcon,
+                              fit: BoxFit.none),
                         ),
                         GetBuilder<ProductDetailsController>(
                           id: 'FavoriteButton',
                           builder: (_) => RoundedButton(
-                            onPressed: () => controller.onFavoriteButtonPressed(),
+                            onPressed: () =>
+                                controller.onFavoriteButtonPressed(),
                             child: Align(
-                              child: SvgPicture.asset(
-                                controller.product.isFavorite!
-                                  ? Constants.favFilledIcon
-                                  : Constants.favOutlinedIcon,
+                              child: UniversalImage(
+                                controller.product.isFavorite
+                                    ? Constants.favFilledIcon
+                                    : Constants.favOutlinedIcon,
                                 width: 16.w,
                                 height: 15.h,
-                                color: controller.product.isFavorite!
-                                  ? null : Colors.white,
+                                color: controller.product.isFavorite
+                                    ? null
+                                    : Colors.white,
                               ),
                             ),
                           ),
@@ -73,14 +73,14 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   Positioned(
                     right: controller.product.id == 2 ? 0 : 30.w,
                     bottom: -350.h,
-                    child: Image.asset(
+                    child: UniversalImage(
                       controller.product.image!,
                       height: 700.h,
                     ).animate().slideX(
-                      duration: const Duration(milliseconds: 300),
-                      begin: 1,
-                      curve: Curves.easeInSine,
-                    ),
+                          duration: const Duration(milliseconds: 300),
+                          begin: 1,
+                          curve: Curves.easeInSine,
+                        ),
                   ),
                 ],
               ),
@@ -91,10 +91,10 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   controller.product.name!,
                   style: theme.textTheme.bodyLarge,
                 ).animate().fade().slideX(
-                  duration: const Duration(milliseconds: 300),
-                  begin: -1,
-                  curve: Curves.easeInSine,
-                ),
+                      duration: const Duration(milliseconds: 300),
+                      begin: -1,
+                      curve: Curves.easeInSine,
+                    ),
               ),
               10.verticalSpace,
               Padding(
@@ -108,39 +108,25 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                     30.horizontalSpace,
                     const Icon(Icons.star_rounded, color: Color(0xFFFFC542)),
                     5.horizontalSpace,
-                    Text(
-                      controller.product.rating!.toString(),
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    5.horizontalSpace,
-                    Text(
-                      '(${controller.product.reviews!})',
-                      style: theme.textTheme.bodyMedium?.copyWith(fontSize: 16.sp),
-                    ),
                   ],
                 ).animate().fade().slideX(
-                  duration: const Duration(milliseconds: 300),
-                  begin: -1,
-                  curve: Curves.easeInSine,
-                ),
+                      duration: const Duration(milliseconds: 300),
+                      begin: -1,
+                      curve: Curves.easeInSine,
+                    ),
               ),
               20.verticalSpace,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Text(
                   'Choose your size:',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: theme.textTheme.bodyMedium
+                      ?.copyWith(fontSize: 18.sp, fontWeight: FontWeight.bold),
                 ).animate().fade().slideX(
-                  duration: const Duration(milliseconds: 300),
-                  begin: -1,
-                  curve: Curves.easeInSine,
-                ),
+                      duration: const Duration(milliseconds: 300),
+                      begin: -1,
+                      curve: Curves.easeInSine,
+                    ),
               ),
               10.verticalSpace,
               Padding(
@@ -174,11 +160,11 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                       ),
                     ],
                   ).animate().fade().slideX(
-                    duration: const Duration(milliseconds: 300),
-                    begin: -1,
-                    curve: Curves.easeInSine,
-                  ),
-                ),              
+                        duration: const Duration(milliseconds: 300),
+                        begin: -1,
+                        curve: Curves.easeInSine,
+                      ),
+                ),
               ),
               20.verticalSpace,
               Padding(
@@ -196,10 +182,10 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   shadowBlurRadius: 4,
                   shadowSpreadRadius: 0,
                 ).animate().fade().slideY(
-                  duration: const Duration(milliseconds: 300),
-                  begin: 1,
-                  curve: Curves.easeInSine,
-                ),
+                      duration: const Duration(milliseconds: 300),
+                      begin: 1,
+                      curve: Curves.easeInSine,
+                    ),
               ),
             ],
           ),

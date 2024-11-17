@@ -1,8 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:universal_image/universal_image.dart';
 
 import '../../utils/constants.dart';
 import '../data/models/product_model.dart';
@@ -11,10 +12,7 @@ import '../routes/app_pages.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductModel product;
-  const ProductItem({
-    Key? key,
-    required this.product
-  }) : super(key: key);
+  const ProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +27,28 @@ class ProductItem extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 200.h,
+                  height: 220.h,
                   decoration: BoxDecoration(
                     color: const Color(0xFFEDF1FA),
                     borderRadius: BorderRadius.circular(25.r),
                   ),
                 ),
                 Positioned(
-                  right: product.id == 2 ? 0 : 20.w,
-                  bottom: -80.h,
-                  child: Image.asset(product.image!, height: 260.h)
-                    .animate().slideX(
-                      duration: const Duration(milliseconds: 200),
-                      begin: 1,
-                      curve: Curves.easeInSine,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25.r),
+                      child: UniversalImage(
+                        product.image!,
+                        height: 200.h,
+                        fit: BoxFit.cover,
+                      ).animate().slideX(
+                            duration: const Duration(milliseconds: 200),
+                            begin: 1,
+                            curve: Curves.easeInSine,
+                          ),
                     ),
+                  ),
                 ),
                 Positioned(
                   left: 15.w,
@@ -52,16 +57,15 @@ class ProductItem extends StatelessWidget {
                     id: 'FavoriteButton',
                     builder: (controller) => GestureDetector(
                       onTap: () => controller.onFavoriteButtonPressed(
-                        productId: product.id!
-                      ),
+                          productId: product.id!),
                       child: CircleAvatar(
                         radius: 18.r,
                         backgroundColor: Colors.white,
-                        child: SvgPicture.asset(
-                          product.isFavorite!
-                            ? Constants.favFilledIcon
-                            : Constants.favOutlinedIcon,
-                          color: product.isFavorite! ? null : theme.primaryColor,
+                        child: UniversalImage(
+                          product.isFavorite
+                              ? Constants.favFilledIcon
+                              : Constants.favOutlinedIcon,
+                          color: product.isFavorite ? null : theme.primaryColor,
                         ),
                       ),
                     ),
@@ -70,19 +74,27 @@ class ProductItem extends StatelessWidget {
               ],
             ),
             10.verticalSpace,
-            Text(product.name!, style: theme.textTheme.bodyMedium)
-              .animate().fade().slideY(
-                duration: const Duration(milliseconds: 200),
-                begin: 1,
-                curve: Curves.easeInSine,
-              ),
+            AutoSizeText(
+              product.name!,
+              style: theme.textTheme.bodyMedium,
+              minFontSize: 7,
+              maxLines: 2,
+            ).animate().fade().slideY(
+                  duration: const Duration(milliseconds: 200),
+                  begin: 1,
+                  curve: Curves.easeInSine,
+                ),
             5.verticalSpace,
-            Text('\$${product.price}', style: theme.textTheme.displaySmall)
-              .animate().fade().slideY(
-                duration: const Duration(milliseconds: 200),
-                begin: 2,
-                curve: Curves.easeInSine,
-              ),
+            AutoSizeText(
+              '\$${product.price}',
+              style: theme.textTheme.displaySmall,
+              minFontSize: 7,
+              maxLines: 2,
+            ).animate().fade().slideY(
+                  duration: const Duration(milliseconds: 200),
+                  begin: 2,
+                  curve: Curves.easeInSine,
+                ),
           ],
         ),
       ),

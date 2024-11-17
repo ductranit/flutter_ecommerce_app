@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:universal_image/universal_image.dart';
 
 import '../../../../../utils/constants.dart';
 
 class NotificationItem extends StatelessWidget {
-  const NotificationItem({Key? key}) : super(key: key);
+  const NotificationItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class NotificationItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Center(
-            child: SvgPicture.asset(
+            child: UniversalImage(
               Constants.notificationsIcon,
               color: Colors.white,
             ),

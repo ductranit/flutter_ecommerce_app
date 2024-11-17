@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:universal_image/universal_image.dart';
 
 import '../../../../utils/constants.dart';
 import '../controllers/base_controller.dart';
@@ -12,7 +12,7 @@ import '../../notifications/views/notifications_view.dart';
 import '../../settings/views/settings_view.dart';
 
 class BaseView extends GetView<BaseController> {
-  const BaseView({Key? key}) : super(key: key);
+  const BaseView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +95,8 @@ class BaseView extends GetView<BaseController> {
   _mBottomNavItem({required String label, required String icon}) {
     return BottomNavigationBarItem(
       label: label,
-      icon: SvgPicture.asset(icon, color: Get.theme.iconTheme.color),
-      activeIcon: SvgPicture.asset(icon, color: Get.theme.primaryColor),
+      icon: UniversalImage(icon, color: Get.theme.iconTheme.color),
+      activeIcon: UniversalImage(icon, color: Get.theme.primaryColor),
     );
   }
 }
