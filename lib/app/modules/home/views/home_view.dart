@@ -1,10 +1,10 @@
+import 'package:ecommerce_app/app/components/product_item.dart';
+import 'package:ecommerce_app/app/components/screen_title.dart';
+import 'package:ecommerce_app/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import '../../../components/product_item.dart';
-import '../../../components/screen_title.dart';
-import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});

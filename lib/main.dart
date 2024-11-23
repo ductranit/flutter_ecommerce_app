@@ -22,7 +22,7 @@ Future<void> main() async {
       minTextAdapt: true,
       splitScreenMode: true,
       useInheritedMediaQuery: true,
-      rebuildFactor: (old, data) => true,
+      rebuildFactor: (old, data) => false,
       builder: (context, widget) {
         return GetMaterialApp(
             title: "E-commerce App",

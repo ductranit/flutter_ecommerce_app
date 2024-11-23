@@ -1,6 +1,7 @@
-import 'package:ecommerce_app/app/modules/categories/controllers/categories_controller.dart';
 import 'package:get/get.dart';
+import '../../authentication/controllers/auth_controller.dart';
 import '../../cart/controllers/cart_controller.dart';
+import '../../categories/controllers/categories_controller.dart';
 import '../../favorites/controllers/favorites_controller.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../notifications/controllers/notifications_controller.dart';
@@ -17,5 +18,6 @@ class BaseBinding extends Bindings {
     Get.lazyPut<NotificationsController>(() => NotificationsController());
     Get.lazyPut<CategoriesController>(() => CategoriesController());
     Get.lazyPut<SettingsController>(() => SettingsController());
+    Get.lazyPut<AuthController>(() => AuthController());
   }
 }

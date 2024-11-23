@@ -22,6 +22,7 @@ dependencies:
   auto_size_text:
   logger:
   flutter_html: ^3.0.0-beta.2
+  animated_login: ^1.7.2
 
   flutter: 
     sdk: flutter

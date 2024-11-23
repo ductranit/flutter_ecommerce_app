@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/data/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../utils/constants.dart';
 import '../../../components/screen_title.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/settings_controller.dart';
 import 'widgets/settings_item.dart';
 
@@ -31,11 +33,19 @@ class SettingsView extends GetView<SettingsController> {
                   fontWeight: FontWeight.normal,
                 )),
             20.verticalSpace,
-            const SettingsItem(
-              title: 'Alice Smith',
-              icon: Constants.userIcon,
-              isAccount: true,
-            ),
+            Obx(() {
+              final isSignedIn = UserService.to.isSignedIn;
+              final user = UserService.to.user;
+              final userName = user?.name ?? '';
+              final avatar = user?.avatar ?? '';
+              return GestureDetector(
+                onTap: () => Get.toNamed(Routes.AUTH),
+                child: SettingsItem(
+                  title: !isSignedIn ? 'Sign in' : userName,
+                  icon: avatar.isNotEmpty ? avatar : Constants.userIcon,
+                ),
+              );
+            }),
             30.verticalSpace,
             Text('Settings',
                 style: theme.textTheme.displayMedium?.copyWith(
@@ -59,10 +69,15 @@ class SettingsView extends GetView<SettingsController> {
               icon: Constants.helpIcon,
             ),
             25.verticalSpace,
-            const SettingsItem(
-              title: 'Sign Out',
-              icon: Constants.logoutIcon,
-            ),
+            Obx(() => Visibility(
+                visible: UserService.to.isSignedIn,
+                child: GestureDetector(
+                  onTap: () => UserService.to.logout(),
+                  child: const SettingsItem(
+                    title: 'Sign Out',
+                    icon: Constants.logoutIcon,
+                  ),
+                ))),
             20.verticalSpace,
           ],
         ),

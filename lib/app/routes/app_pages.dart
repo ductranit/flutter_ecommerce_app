@@ -1,11 +1,13 @@
-import 'package:ecommerce_app/app/modules/categories/bindings/categories_binding.dart';
-import 'package:ecommerce_app/app/modules/categories/views/categories_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/authentication/bindings/auth_binding.dart';
+import '../modules/authentication/views/auth_view.dart';
 import '../modules/base/bindings/base_binding.dart';
 import '../modules/base/views/base_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
+import '../modules/categories/bindings/categories_binding.dart';
+import '../modules/categories/views/categories_view.dart';
 import '../modules/favorites/bindings/favorites_binding.dart';
 import '../modules/favorites/views/favorites_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -74,6 +76,11 @@ class AppPages {
       binding: ProductDetailsBinding(),
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: _Paths.AUTH,
+      page: () => const AuthView(),
+      binding: AuthBinding(),
     ),
   ];
 }

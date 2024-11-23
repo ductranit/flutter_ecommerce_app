@@ -10,13 +10,11 @@ import '../../controllers/settings_controller.dart';
 class SettingsItem extends StatelessWidget {
   final String title;
   final String icon;
-  final bool isAccount;
   final bool isDark;
   const SettingsItem({
     super.key,
     required this.title,
     required this.icon,
-    this.isAccount = false,
     this.isDark = false,
   });
 
@@ -28,16 +26,14 @@ class SettingsItem extends StatelessWidget {
           style: theme.textTheme.displayMedium?.copyWith(
             fontSize: 16.sp,
           )),
-      subtitle: !isAccount
-          ? null
-          : Text(
-              '+191 23 456 7890',
-              style: theme.textTheme.displaySmall,
-            ),
+      subtitle: null,
       leading: CircleAvatar(
-        radius: isAccount ? 30.r : 25.r,
+        radius: 25.r,
         backgroundColor: theme.primaryColor,
-        child: UniversalImage(icon, fit: BoxFit.none),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(25.r),
+          child: UniversalImage(icon, fit: BoxFit.none),
+        ),
       ),
       trailing: isDark
           ? GetBuilder<SettingsController>(

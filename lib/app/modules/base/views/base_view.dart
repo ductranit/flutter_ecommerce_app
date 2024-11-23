@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:universal_image/universal_image.dart';
 
-import '../../../../utils/constants.dart';
 import '../controllers/base_controller.dart';
 import '../../cart/views/cart_view.dart';
 import '../../favorites/views/favorites_view.dart';
@@ -65,26 +64,20 @@ class BaseView extends GetView<BaseController> {
               items: [
                 _mBottomNavItem(
                   label: 'Home'.tr,
-                  icon: Constants.homeIcon,
                   iconData: Icons.store,
                 ),
                 _mBottomNavItem(
                   label: 'Favorites'.tr,
-                  icon: Constants.favoritesIcon,
                   iconData: Icons.favorite,
                 ),
                 _mBottomNavItem(
                   label: 'Cart'.tr,
-                  icon: Constants.cartIcon,
                   iconData: Icons.shopping_cart,
                 ),
                 _mBottomNavItem(
-                    label: 'Categories'.tr,
-                    icon: Constants.categoriesIcon,
-                    iconData: Icons.category),
+                    label: 'Categories'.tr, iconData: Icons.category),
                 _mBottomNavItem(
                   label: 'Settings'.tr,
-                  icon: Constants.settingsIcon,
                   iconData: Icons.settings,
                 ),
               ],
@@ -96,14 +89,10 @@ class BaseView extends GetView<BaseController> {
     );
   }
 
-  _mBottomNavItem(
-      {required String label, required String icon, IconData? iconData}) {
-    final iconWidget = iconData != null
-        ? UniversalImage.icon(iconData, color: Get.theme.iconTheme.color)
-        : UniversalImage(icon, color: Get.theme.iconTheme.color);
-    final activeIcon = iconData != null
-        ? UniversalImage.icon(iconData, color: Get.theme.primaryColor)
-        : UniversalImage(icon, color: Get.theme.primaryColor);
+  _mBottomNavItem({required String label, required IconData iconData}) {
+    final iconWidget =
+        UniversalImage(iconData, color: Get.theme.iconTheme.color);
+    final activeIcon = UniversalImage(iconData, color: Get.theme.primaryColor);
     return BottomNavigationBarItem(
       label: label,
       icon: iconWidget,
