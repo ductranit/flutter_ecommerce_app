@@ -1,12 +1,13 @@
+import 'package:ecommerce_app/app/modules/authentication/controllers/auth_controller.dart';
+import 'package:ecommerce_app/app/modules/base/controllers/base_controller.dart';
+import 'package:ecommerce_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:ecommerce_app/app/modules/categories/controllers/categories_controller.dart';
+import 'package:ecommerce_app/app/modules/category_products/controllers/category_details_controller.dart';
+import 'package:ecommerce_app/app/modules/favorites/controllers/favorites_controller.dart';
+import 'package:ecommerce_app/app/modules/home/controllers/home_controller.dart';
+import 'package:ecommerce_app/app/modules/notifications/controllers/notifications_controller.dart';
+import 'package:ecommerce_app/app/modules/settings/controllers/settings_controller.dart';
 import 'package:get/get.dart';
-import '../../authentication/controllers/auth_controller.dart';
-import '../../cart/controllers/cart_controller.dart';
-import '../../categories/controllers/categories_controller.dart';
-import '../../favorites/controllers/favorites_controller.dart';
-import '../../home/controllers/home_controller.dart';
-import '../../notifications/controllers/notifications_controller.dart';
-import '../../settings/controllers/settings_controller.dart';
-import '../controllers/base_controller.dart';
 
 class BaseBinding extends Bindings {
   @override
@@ -19,5 +20,6 @@ class BaseBinding extends Bindings {
     Get.lazyPut<CategoriesController>(() => CategoriesController());
     Get.lazyPut<SettingsController>(() => SettingsController());
     Get.lazyPut<AuthController>(() => AuthController());
+    Get.lazyPut<CategoryDetailsController>(() => CategoryDetailsController());
   }
 }

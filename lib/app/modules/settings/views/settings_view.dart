@@ -1,8 +1,10 @@
+import 'package:ecommerce_app/data/configs.dart';
 import 'package:ecommerce_app/data/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../utils/constants.dart';
 import '../../../components/screen_title.dart';
@@ -59,14 +61,12 @@ class SettingsView extends GetView<SettingsController> {
               isDark: true,
             ),
             25.verticalSpace,
-            const SettingsItem(
-              title: 'Language',
-              icon: Constants.languageIcon,
-            ),
-            25.verticalSpace,
-            const SettingsItem(
-              title: 'Help',
-              icon: Constants.helpIcon,
+            GestureDetector(
+              onTap: () => launchUrl(Uri.parse(baseUrl)),
+              child: const SettingsItem(
+                title: 'Help',
+                icon: Constants.helpIcon,
+              ),
             ),
             25.verticalSpace,
             Obx(() => Visibility(

@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ecommerce_app/app/data/models/category_model.dart';
+import 'package:ecommerce_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import '../../../components/screen_title.dart';
 import '../controllers/categories_controller.dart';
 
@@ -39,9 +39,7 @@ class CaetgoriesView extends GetView<CategoriesController> {
                     maxLines: 1,
                   ),
                   onTap: () {
-                    // Handle child category tap
-                    Get.find<Logger>()
-                        .i('Tapped on child category: ${child.name}');
+                    Get.toNamed(Routes.CATEGORIES_DETAILS, arguments: child);
                   },
                 );
               },
@@ -57,8 +55,7 @@ class CaetgoriesView extends GetView<CategoriesController> {
       child: ListTile(
         title: Text(category.name ?? ''),
         onTap: () {
-          // Handle category tap
-          Get.find<Logger>().i('Tapped on category: ${category.name}');
+          Get.toNamed(Routes.CATEGORIES_DETAILS, arguments: category);
         },
       ),
     );

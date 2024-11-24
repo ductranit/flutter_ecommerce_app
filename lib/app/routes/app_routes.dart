@@ -13,6 +13,7 @@ abstract class Routes {
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
   static const SETTINGS = _Paths.SETTINGS;
   static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
+  static const CATEGORIES_DETAILS = _Paths.CATEGORIES_DETAILS;
   static const AUTH = _Paths.AUTH;
 }
 
@@ -28,4 +29,5 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const PRODUCT_DETAILS = '/product-details';
   static const AUTH = '/auth';
+  static const CATEGORIES_DETAILS = '/categories-details';
 }

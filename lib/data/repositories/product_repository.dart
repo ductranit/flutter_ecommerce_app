@@ -11,6 +11,11 @@ class ProductRepository {
     return response.data ?? [];
   }
 
+  Future<ProductListResponse> getCategoryProducts(int categoryId) async {
+    final response = await restClient.getProductsByCategory(categoryId);
+    return response;
+  }
+
   Future<BaseResponse> addProductToCart(int productId,
       {int quantity = 1}) async {
     return await restClient.addToCart(CartRequest(
