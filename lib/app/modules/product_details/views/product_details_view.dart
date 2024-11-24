@@ -1,3 +1,6 @@
+import 'package:ecommerce_app/app/components/custom_button.dart';
+import 'package:ecommerce_app/app/modules/product_details/controllers/product_details_controller.dart';
+import 'package:ecommerce_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -6,11 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:universal_image/universal_image.dart';
 
-import '../../../../utils/constants.dart';
-import '../../../components/custom_button.dart';
-import '../controllers/product_details_controller.dart';
 import 'widgets/rounded_button.dart';
-import 'widgets/size_item.dart';
 
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({super.key});
@@ -40,8 +39,8 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   Positioned(
                     child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 25.h),
-                        height: 450,
+                            horizontal: 10.w, vertical: 10.h),
+                        height: 430,
                         alignment: Alignment.center,
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -73,25 +72,39 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                           child: UniversalImage(Constants.backArrowIcon,
                               fit: BoxFit.none),
                         ),
-                        GetBuilder<ProductDetailsController>(
-                          id: 'FavoriteButton',
-                          builder: (_) => RoundedButton(
-                            onPressed: () =>
-                                controller.onFavoriteButtonPressed(),
-                            child: Align(
-                              child: UniversalImage(
-                                controller.product.isFavorite
-                                    ? Constants.favFilledIcon
-                                    : Constants.favOutlinedIcon,
-                                width: 16.w,
-                                height: 15.h,
-                                color: controller.product.isFavorite
-                                    ? null
-                                    : Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        Obx(() => Row(
+                              children: [
+                                RoundedButton(
+                                  onPressed: () =>
+                                      controller.onFavoriteButtonPressed(),
+                                  child: Align(
+                                    child: UniversalImage(
+                                      controller.isFavorite()
+                                          ? Constants.favFilledIcon
+                                          : Constants.favOutlinedIcon,
+                                      width: 16.w,
+                                      height: 15.h,
+                                      color: controller.isFavorite()
+                                          ? null
+                                          : Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10.w),
+                                RoundedButton(
+                                  onPressed: () =>
+                                      controller.onAddToCartPressed(),
+                                  child: Align(
+                                    child: UniversalImage(
+                                      Icons.shopping_cart,
+                                      width: 16.w,
+                                      height: 15.h,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )),
                       ],
                     ),
                   ),
@@ -127,57 +140,6 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                       begin: -1,
                       curve: Curves.easeInSine,
                     ),
-              ),
-              20.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Text(
-                  'Choose your size:',
-                  style: theme.textTheme.bodyMedium
-                      ?.copyWith(fontSize: 18.sp, fontWeight: FontWeight.bold),
-                ).animate().fade().slideX(
-                      duration: const Duration(milliseconds: 300),
-                      begin: -1,
-                      curve: Curves.easeInSine,
-                    ),
-              ),
-              10.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: GetBuilder<ProductDetailsController>(
-                  id: 'Size',
-                  builder: (_) => Row(
-                    children: [
-                      SizeItem(
-                        onPressed: () => controller.changeSelectedSize('S'),
-                        label: 'S',
-                        selected: controller.selectedSize == 'S',
-                      ),
-                      10.horizontalSpace,
-                      SizeItem(
-                        onPressed: () => controller.changeSelectedSize('M'),
-                        label: 'M',
-                        selected: controller.selectedSize == 'M',
-                      ),
-                      10.horizontalSpace,
-                      SizeItem(
-                        onPressed: () => controller.changeSelectedSize('L'),
-                        label: 'L',
-                        selected: controller.selectedSize == 'L',
-                      ),
-                      10.horizontalSpace,
-                      SizeItem(
-                        onPressed: () => controller.changeSelectedSize('XL'),
-                        label: 'XL',
-                        selected: controller.selectedSize == 'XL',
-                      ),
-                    ],
-                  ).animate().fade().slideX(
-                        duration: const Duration(milliseconds: 300),
-                        begin: -1,
-                        curve: Curves.easeInSine,
-                      ),
-                ),
               ),
               20.verticalSpace,
               Html(

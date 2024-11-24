@@ -1,12 +1,8 @@
-import 'package:ecommerce_app/data/repositories/product_repository.dart';
+import 'package:ecommerce_app/data/services/product_service.dart';
 import 'package:get/get.dart';
 
-import '../../../data/models/product_model.dart';
-
 class HomeController extends GetxController {
-  var products = <ProductModel>[].obs;
-  final productRepository = Get.find<ProductRepository>();
-
+  final products = ProductService.to.allProducts;
   @override
   void onInit() {
     getProducts();
@@ -14,7 +10,6 @@ class HomeController extends GetxController {
   }
 
   getProducts() async {
-    final response = await productRepository.getProducts();
-    products.value = response.map((e) => ProductModel.from(e)).toList();
+    ProductService.to.loadProducts();
   }
 }

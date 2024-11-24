@@ -1,12 +1,10 @@
+import 'package:ecommerce_app/data/services/product_service.dart';
 import 'package:get/get.dart';
 
-import '../../../../utils/dummy_helper.dart';
 import '../../../data/models/product_model.dart';
 import '../../base/controllers/base_controller.dart';
-import '../../cart/controllers/cart_controller.dart';
 
 class ProductDetailsController extends GetxController {
-
   // get product details from arguments
   ProductModel product = Get.arguments;
 
@@ -15,16 +13,15 @@ class ProductDetailsController extends GetxController {
 
   /// when the user press on the favorite button
   onFavoriteButtonPressed() {
-    Get.find<BaseController>().onFavoriteButtonPressed(productId: product.id!);
+    Get.find<BaseController>().onFavoriteButtonPressed(product);
     update(['FavoriteButton']);
   }
 
   /// when the user press on add to cart button
   onAddToCartPressed() {
-    var mProduct = DummyHelper.products.firstWhere((p) => p.id == product.id);
-    mProduct.quantity = mProduct.quantity! + 1;
-    mProduct.size = selectedSize;
-    Get.find<CartController>().getCartProducts();
+    product.size = selectedSize;
+    ProductService.to.addToCart(product, 1);
+
     Get.back();
   }
 
@@ -35,4 +32,7 @@ class ProductDetailsController extends GetxController {
     update(['Size']);
   }
 
+  bool isFavorite() {
+    return ProductService.to.isFavorite(product);
+  }
 }

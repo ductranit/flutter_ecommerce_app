@@ -1,7 +1,6 @@
+import 'package:ecommerce_app/app/data/models/product_model.dart';
+import 'package:ecommerce_app/data/services/product_service.dart';
 import 'package:get/get.dart';
-
-import '../../../../utils/dummy_helper.dart';
-import '../../favorites/controllers/favorites_controller.dart';
 
 class BaseController extends GetxController {
   // current screen index
@@ -14,18 +13,16 @@ class BaseController extends GetxController {
   }
 
   /// when the user press on the favorite button in the product
-  onFavoriteButtonPressed({required int productId}) {
-    var product =
-        DummyHelper.products.firstWhere((product) => product.id == productId);
-    if (product.isFavorite) {
-      // remove product from favorites
-      product.isFavorite = false;
-      Get.find<FavoritesController>().getFavoriteProducts();
-    } else {
-      // add product to favorites
-      product.isFavorite = true;
-      Get.find<FavoritesController>().getFavoriteProducts();
-    }
+  void onFavoriteButtonPressed(ProductModel product) {
+    ProductService.to.addOrRemoveFavorite(product);
     update(['FavoriteButton']);
+  }
+
+  bool isFavorite(ProductModel product) {
+    return ProductService.to.isFavorite(product);
+  }
+
+  void addToCart(ProductModel product, int quantity) {
+    ProductService.to.addToCart(product, quantity);
   }
 }

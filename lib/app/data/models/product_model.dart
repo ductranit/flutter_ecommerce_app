@@ -8,16 +8,15 @@ class ProductModel {
   double? price;
   String? size;
   String? description;
-  bool isFavorite = false;
-  ProductModel(
-      {this.id,
-      this.image,
-      this.name,
-      this.quantity,
-      this.price,
-      this.size,
-      this.description,
-      this.isFavorite = false});
+  ProductModel({
+    this.id,
+    this.image,
+    this.name,
+    this.quantity,
+    this.price,
+    this.size,
+    this.description,
+  });
 
   ProductModel.from(Product product) {
     id = product.id;

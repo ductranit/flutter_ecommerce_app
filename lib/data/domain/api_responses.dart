@@ -2,6 +2,7 @@
 
 import 'package:ecommerce_app/domain/address.dart';
 import 'package:ecommerce_app/domain/brand.dart';
+import 'package:ecommerce_app/domain/cart.dart';
 import 'package:ecommerce_app/domain/category.dart';
 import 'package:ecommerce_app/domain/country.dart';
 import 'package:ecommerce_app/domain/order.dart';
@@ -700,30 +701,6 @@ class CartRefreshRequest {
   Map<String, dynamic> toJson() {
     return {
       'products': products?.map((e) => e.toJson()).toList(),
-    };
-  }
-}
-
-class CartItem {
-  int? productId;
-  int? quantity;
-
-  CartItem({
-    this.productId,
-    this.quantity,
-  });
-
-  factory CartItem.fromJson(Map<String, dynamic> json) {
-    return CartItem(
-      productId: json['product_id'] as int?,
-      quantity: json['quantity'] as int?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'product_id': productId,
-      'quantity': quantity,
     };
   }
 }

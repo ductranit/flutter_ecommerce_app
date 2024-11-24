@@ -16,35 +16,33 @@ class FavoritesView extends GetView<FavoritesController> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: ListView(
-          children: [
-            30.verticalSpace,
-            const ScreenTitle(
-              title: 'Favorites',
-              dividerEndIndent: 200,
-            ),
-            20.verticalSpace,
-            GetBuilder<FavoritesController>(
-              builder: (_) => controller.products.isEmpty
-                  ? const NoData(text: 'No Products in Favorite Yet!')
-                  : GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15.w,
-                        mainAxisSpacing: 15.h,
-                        mainAxisExtent: 260.h,
-                      ),
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: controller.products.length,
-                      itemBuilder: (context, index) => ProductItem(
-                        product: controller.products[index],
-                      ),
+        child: ListView(children: [
+          30.verticalSpace,
+          const ScreenTitle(
+            title: 'Favorites',
+            dividerEndIndent: 200,
+          ),
+          20.verticalSpace,
+          Obx(
+            () => controller.favoriteProducts.isEmpty
+                ? const NoData(text: 'No Products in Favorite Yet!')
+                : GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 15.w,
+                      mainAxisSpacing: 15.h,
+                      mainAxisExtent: 300.h,
                     ),
-            ),
-            10.verticalSpace,
-          ],
-        ),
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: controller.favoriteProducts.length,
+                    itemBuilder: (context, index) => ProductItem(
+                      product: controller.favoriteProducts[index],
+                    ),
+                  ),
+          ),
+          10.verticalSpace,
+        ]),
       ),
     );
   }

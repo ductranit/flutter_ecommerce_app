@@ -2,7 +2,7 @@ import 'package:ecommerce_app/app/data/local/my_shared_pref.dart';
 import 'package:ecommerce_app/data/domain/api_responses.dart';
 import 'package:ecommerce_app/data/repositories/user_repository.dart';
 import 'package:ecommerce_app/domain/user.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:ecommerce_app/utils/ext.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
@@ -24,7 +24,7 @@ class UserService extends GetxService {
     try {
       final storedUser = MySharedPref.getAuthToken();
       if (storedUser != null) {
-        _updateSignedIn(true);
+        _isSignedIn.safeUpdate(true);
 
         await getUserProfile();
       }
@@ -40,7 +40,7 @@ class UserService extends GetxService {
     }
 
     MySharedPref.setAuthToken(response.data?.token ?? '');
-    _updateSignedIn(true);
+    _isSignedIn.safeUpdate(true);
     getUserProfile();
     return null;
   }
@@ -77,23 +77,13 @@ class UserService extends GetxService {
       return;
     }
 
-    _updateUser(response.data);
+    _user.safeUpdate(response.data);
   }
 
   Future<void> logout() async {
     userRepository.logout();
     MySharedPref.removeAuthToken();
-    _updateUser(null);
-    _updateSignedIn(false);
+    _user.safeUpdate(null);
+    _isSignedIn.safeUpdate(false);
   }
-
-  void _updateSignedIn(bool value) =>
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        _isSignedIn.value = value;
-      });
-
-  void _updateUser(UserProfile? value) =>
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        _user.value = value;
-      });
 }

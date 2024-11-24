@@ -56,16 +56,35 @@ class ProductItem extends StatelessWidget {
                   child: GetBuilder<BaseController>(
                     id: 'FavoriteButton',
                     builder: (controller) => GestureDetector(
-                      onTap: () => controller.onFavoriteButtonPressed(
-                          productId: product.id!),
+                      onTap: () => controller.onFavoriteButtonPressed(product),
                       child: CircleAvatar(
                         radius: 18.r,
                         backgroundColor: Colors.white,
                         child: UniversalImage(
-                          product.isFavorite
+                          controller.isFavorite(product)
                               ? Constants.favFilledIcon
                               : Constants.favOutlinedIcon,
-                          color: product.isFavorite ? null : theme.primaryColor,
+                          color: controller.isFavorite(product)
+                              ? null
+                              : theme.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                ).animate().fade(),
+                Positioned(
+                  right: 15.w,
+                  bottom: 20.h,
+                  child: GetBuilder<BaseController>(
+                    id: 'CardButton',
+                    builder: (controller) => GestureDetector(
+                      onTap: () => controller.addToCart(product, 1),
+                      child: CircleAvatar(
+                        radius: 18.r,
+                        backgroundColor: Colors.white,
+                        child: UniversalImage(
+                          Icons.shopping_cart,
+                          color: theme.primaryColor,
                         ),
                       ),
                     ),

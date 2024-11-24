@@ -1,17 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ecommerce_app/app/modules/cart/controllers/cart_controller.dart';
+import 'package:ecommerce_app/domain/cart.dart';
+import 'package:ecommerce_app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:universal_image/universal_image.dart';
 
-import '../../../../../utils/constants.dart';
-import '../../../../data/models/product_model.dart';
-import '../../controllers/cart_controller.dart';
-
-class CartItem extends GetView<CartController> {
-  final ProductModel product;
-  const CartItem({
+class CartItemView extends GetView<CartController> {
+  final CartItem cart;
+  const CartItemView({
     super.key,
-    required this.product,
+    required this.cart,
   });
 
   @override
@@ -32,33 +33,42 @@ class CartItem extends GetView<CartController> {
                   color: const Color(0xFFEDF1FA),
                 ),
                 Positioned(
-                  left: 15.w,
-                  bottom: -150.h,
-                  child: UniversalImage(
-                    product.image!,
-                    height: 250.h,
+                  left: 0.w,
+                  bottom: 00.h,
+                  width: 105.w,
+                  height: 125.h,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25.r),
+                    child: UniversalImage(
+                      cart.product?.image ?? '',
+                      height: 200.h,
+                      fit: BoxFit.contain,
+                    ).animate().slideX(
+                          duration: const Duration(milliseconds: 200),
+                          begin: 1,
+                          curve: Curves.easeInSine,
+                        ),
                   ),
                 ),
               ],
             ),
           ),
           20.horizontalSpace,
-          Column(
+          Expanded(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               5.verticalSpace,
-              Text(
-                product.name!,
-                style: theme.textTheme.displayMedium,
+              AutoSizeText(
+                cart.product?.name ?? '',
+                style: theme.textTheme.displaySmall,
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
               5.verticalSpace,
-              Text('Size: ${product.size}',
-                  style: theme.textTheme.bodyMedium?.copyWith(fontSize: 16.sp)),
-              5.verticalSpace,
               Text(
-                '\$${product.price}',
-                style: theme.textTheme.displayLarge?.copyWith(
+                '\$${cart.product?.price}',
+                style: theme.textTheme.displaySmall?.copyWith(
                   fontSize: 18.sp,
                 ),
               ),
@@ -67,27 +77,27 @@ class CartItem extends GetView<CartController> {
                 id: 'ProductQuantity',
                 builder: (_) => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     GestureDetector(
-                      onTap: () => controller.onIncreasePressed(product.id!),
+                      onTap: () => controller.onIncreasePressed(cart.product!),
                       child: UniversalImage(Constants.decreaseIcon),
                     ),
                     10.horizontalSpace,
-                    Text('${product.quantity}',
+                    Text('${cart.quantity}',
                         style: theme.textTheme.displaySmall),
                     10.horizontalSpace,
                     GestureDetector(
-                      onTap: () => controller.onDecreasePressed(product.id!),
+                      onTap: () => controller.onDecreasePressed(cart.product!),
                       child: UniversalImage(Constants.increaseIcon),
                     ),
                   ],
                 ),
               ),
             ],
-          ),
-          const Spacer(),
+          )),
           InkWell(
-            onTap: () => controller.onDeletePressed(product.id!),
+            onTap: () => controller.onDeletePressed(cart.product!),
             customBorder: const CircleBorder(),
             child: Container(
               padding: EdgeInsets.all(10.r),
