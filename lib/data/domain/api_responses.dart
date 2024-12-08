@@ -659,6 +659,30 @@ class ProductListResponse {
   }
 }
 
+class CreateCartRequest {
+  var productIds = <int>[];
+  var quantities = <int>[];
+
+  CreateCartRequest({
+    this.productIds = const [],
+    this.quantities = const [],
+  });
+
+  factory CreateCartRequest.fromJson(Map<String, dynamic> json) {
+    return CreateCartRequest(
+      productIds: json['product_ids'] as List<int>,
+      quantities: json['qty'] as List<int>,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'product_ids': productIds,
+      'qty': quantities,
+    };
+  }
+}
+
 class CartRequest {
   int? productId;
   int? quantity;

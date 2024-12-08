@@ -1,9 +1,7 @@
 import 'package:ecommerce_app/data/services/product_service.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-
-import '../../../components/custom_snackbar.dart';
 import '../../../data/models/product_model.dart';
-import '../../base/controllers/base_controller.dart';
 
 class CartController extends GetxController {
   // to hold the products in cart
@@ -13,10 +11,13 @@ class CartController extends GetxController {
   var total = ProductService.to.cartPrice;
 
   /// when the user press on purchase now button
-  onPurchaseNowPressed() {
-    Get.find<BaseController>().changeScreen(0);
-    CustomSnackBar.showCustomSnackBar(
-        title: 'Purchased', message: 'Order placed with success');
+  onPurchaseNowPressed() async {
+    // create cart order
+    final cartId = await ProductService.to.checkout();
+    if (cartId.isNotEmpty) {
+      final checkoutUrl = dotenv.get('CHECKOUT_URL', fallback: '');
+      Get.toNamed('/checkout', arguments: '$checkoutUrl?cartId=$cartId');
+    }
   }
 
   /// when the user press on increase button

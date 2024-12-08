@@ -93,6 +93,9 @@ abstract class RestClient {
   @GET("/api/v1/ecommerce/cart/{id}")
   Future<CartResponse> getCard(@Path('id') String id);
 
+  @POST("/api/v1/ecommerce/cart")
+  Future<CartResponse> createCart(@Body() CreateCartRequest request);
+
   // Orders APIs
   @GET("/api/v1/ecommerce/orders")
   Future<OrderListResponse> getOrders();

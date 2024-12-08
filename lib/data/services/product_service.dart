@@ -86,4 +86,14 @@ class ProductService extends GetxService {
   bool isFavorite(ProductModel product) {
     return favoriteProducts.any((item) => item.id == product.id);
   }
+
+  Future<String> checkout() async {
+    final productIds =
+        cart.value.cartItems.map((item) => item.productId).toList();
+    final quantities =
+        cart.value.cartItems.map((item) => item.quantity).toList();
+    final response =
+        await productRepository.createCartCheckout(productIds, quantities);
+    return response.id;
+  }
 }

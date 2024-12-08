@@ -27,4 +27,10 @@ class ProductRepository {
   Future<CartResponse> refreshCard(CartModel cart) async {
     return await restClient.getCard(cart.id);
   }
+
+  Future<CartResponse> createCartCheckout(
+      List<int> productIds, List<int> quantities) async {
+    return await restClient.createCart(
+        CreateCartRequest(productIds: productIds, quantities: quantities));
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/app/modules/category_products/bindings/category_details_binding.dart';
 import 'package:ecommerce_app/app/modules/category_products/views/category_details_view.dart';
+import 'package:ecommerce_app/app/modules/checkout/bindings/checkout_binding.dart';
+import 'package:ecommerce_app/app/modules/checkout/views/checkout_view.dart';
 import 'package:ecommerce_app/app/modules/profile/bindings/profile_binding.dart';
 import 'package:ecommerce_app/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
@@ -95,6 +97,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHECKOUT,
+      page: () => const CheckoutView(),
+      binding: CheckoutBinding(),
     ),
   ];
 }
