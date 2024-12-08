@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/app/modules/category_products/bindings/category_details_binding.dart';
 import 'package:ecommerce_app/app/modules/category_products/views/category_details_view.dart';
+import 'package:ecommerce_app/app/modules/profile/bindings/profile_binding.dart';
+import 'package:ecommerce_app/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/authentication/bindings/auth_binding.dart';
@@ -88,6 +90,11 @@ class AppPages {
       name: _Paths.CATEGORIES_DETAILS,
       page: () => const CategoryDetailsView(),
       binding: CategoryDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

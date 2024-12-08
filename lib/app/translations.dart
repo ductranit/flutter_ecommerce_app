@@ -10,6 +10,7 @@ class AppTranslations extends Translations {
           'Notifications': 'Notifications',
           'Settings': 'Settings',
           'Categories': 'Categories',
+          'Profile': 'Profile',
         },
       };
 }

@@ -37,11 +37,13 @@ class SettingsView extends GetView<SettingsController> {
             20.verticalSpace,
             Obx(() {
               final isSignedIn = UserService.to.isSignedIn;
-              final user = UserService.to.user;
+              final user = UserService.to.user.value;
               final userName = user?.name ?? '';
               final avatar = user?.avatar ?? '';
               return GestureDetector(
-                onTap: () => Get.toNamed(Routes.AUTH),
+                onTap: () => isSignedIn && user != null
+                    ? Get.toNamed(Routes.PROFILE)
+                    : Get.toNamed(Routes.AUTH),
                 child: SettingsItem(
                   title: !isSignedIn ? 'Sign in' : userName,
                   icon: avatar.isNotEmpty ? avatar : Constants.userIcon,

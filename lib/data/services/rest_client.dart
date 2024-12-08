@@ -1,13 +1,12 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:ecommerce_app/data/configs.dart';
 import 'package:ecommerce_app/data/domain/api_responses.dart';
 import 'package:ecommerce_app/domain/address.dart';
 import 'package:retrofit/retrofit.dart';
 part 'rest_client.g.dart';
 
-@RestApi(baseUrl: baseUrl)
+@RestApi()
 abstract class RestClient {
   factory RestClient(Dio dio, {String? baseUrl}) = _RestClient;
 
@@ -86,10 +85,13 @@ abstract class RestClient {
 
   // Cart APIs
   @POST("/api/v1/ecommerce/cart")
-  Future<BaseResponse> addToCart(@Body() CartRequest request);
+  Future<CartResponse> addToCart(@Body() CartRequest request);
 
   @POST("/api/v1/ecommerce/cart/refresh")
   Future<BaseResponse> refreshCart(@Body() CartRefreshRequest request);
+
+  @GET("/api/v1/ecommerce/cart/{id}")
+  Future<CartResponse> getCard(@Path('id') String id);
 
   // Orders APIs
   @GET("/api/v1/ecommerce/orders")

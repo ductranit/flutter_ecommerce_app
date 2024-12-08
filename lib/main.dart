@@ -1,19 +1,16 @@
 import 'package:ecommerce_app/app/modules/base/bindings/service_binding.dart';
 import 'package:ecommerce_app/app/translations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
-
 import 'app/data/local/my_shared_pref.dart';
 import 'app/routes/app_pages.dart';
 import 'config/theme/my_theme.dart';
 
 Future<void> main() async {
-  // wait for bindings
   WidgetsFlutterBinding.ensureInitialized();
-
-  // init shared preference
+  await dotenv.load(fileName: '.env');
   await MySharedPref.init();
 
   runApp(

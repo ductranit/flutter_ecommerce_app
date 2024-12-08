@@ -29,12 +29,12 @@ class CartView extends GetView<CartController> {
                   dividerEndIndent: 280,
                 ),
                 20.verticalSpace,
-                controller.carts.isEmpty
+                controller.cart.value.cartItems.isEmpty
                     ? const NoData(text: 'No Products in Your Cart Yet!')
                     : ListView.builder(
-                        itemCount: controller.carts.length,
+                        itemCount: controller.cart.value.cartItems.length,
                         itemBuilder: (context, index) => CartItemView(
-                          cart: controller.carts[index],
+                          cart: controller.cart.value.cartItems[index],
                         ).animate().fade().slideX(
                               duration: const Duration(milliseconds: 300),
                               begin: -1,
@@ -45,7 +45,7 @@ class CartView extends GetView<CartController> {
                       ),
                 30.verticalSpace,
                 Visibility(
-                  visible: controller.carts.isNotEmpty,
+                  visible: controller.cart.value.cartItems.isNotEmpty,
                   child: Row(
                     children: [
                       Container(
@@ -102,7 +102,7 @@ class CartView extends GetView<CartController> {
                 ),
                 30.verticalSpace,
                 Visibility(
-                  visible: controller.carts.isNotEmpty,
+                  visible: controller.cart.value.cartItems.isNotEmpty,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30.w),
                     child: CustomButton(

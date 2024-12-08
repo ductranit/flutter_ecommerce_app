@@ -24,6 +24,10 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   animated_login: ^1.7.2
   url_launcher:
+  uuid:
+  collection:
+  flutter_inappwebview:
+  flutter_dotenv:
 
   flutter: 
     sdk: flutter
@@ -55,6 +59,7 @@ flutter:
     - assets/images/
     - assets/vectors/
     - assets/fonts/
+    - .env
 
   fonts:
     - family: Poppins

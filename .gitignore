@@ -32,7 +32,6 @@
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
 lib/firebase_options.dart
 
 # Symbolication related
@@ -46,3 +45,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 api_specs
+.env

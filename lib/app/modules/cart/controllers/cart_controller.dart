@@ -7,7 +7,7 @@ import '../../base/controllers/base_controller.dart';
 
 class CartController extends GetxController {
   // to hold the products in cart
-  final carts = ProductService.to.cartItems;
+  final cart = ProductService.to.cart;
 
   // to hold the total price of the cart products
   var total = ProductService.to.cartPrice;

@@ -10,10 +10,9 @@ class UserService extends GetxService {
   static UserService get to => Get.find();
 
   final _isSignedIn = false.obs;
-  final _user = Rxn<UserProfile>();
+  final user = Rxn<UserProfile>();
 
   bool get isSignedIn => _isSignedIn.value;
-  UserProfile? get user => _user.value;
   final userRepository = Get.find<UserRepository>();
 
   Future<void> init() async {
@@ -77,13 +76,13 @@ class UserService extends GetxService {
       return;
     }
 
-    _user.safeUpdate(response.data);
+    user.safeUpdate(response.data);
   }
 
   Future<void> logout() async {
     userRepository.logout();
     MySharedPref.removeAuthToken();
-    _user.safeUpdate(null);
+    user.safeUpdate(null);
     _isSignedIn.safeUpdate(false);
   }
 }

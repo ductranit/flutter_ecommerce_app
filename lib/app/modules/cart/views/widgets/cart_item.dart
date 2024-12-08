@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ecommerce_app/app/data/models/cart_model.dart';
 import 'package:ecommerce_app/app/modules/cart/controllers/cart_controller.dart';
-import 'package:ecommerce_app/domain/cart.dart';
 import 'package:ecommerce_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';

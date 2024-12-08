@@ -1,6 +1,6 @@
+import 'package:ecommerce_app/app/data/models/cart_model.dart';
 import 'package:ecommerce_app/data/domain/api_responses.dart';
 import 'package:ecommerce_app/data/services/rest_client.dart';
-import 'package:ecommerce_app/domain/cart.dart';
 import 'package:ecommerce_app/domain/product.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,7 @@ class ProductRepository {
     return response;
   }
 
-  Future<BaseResponse> addProductToCart(int productId,
+  Future<CartResponse> addProductToCart(int productId,
       {int quantity = 1}) async {
     return await restClient.addToCart(CartRequest(
       productId: productId,
@@ -24,11 +24,7 @@ class ProductRepository {
     ));
   }
 
-  Future<void> refreshCard(List<CartItem> items) async {
-    await restClient.refreshCart(
-      CartRefreshRequest(
-        products: items,
-      ),
-    );
+  Future<CartResponse> refreshCard(CartModel cart) async {
+    return await restClient.getCard(cart.id);
   }
 }

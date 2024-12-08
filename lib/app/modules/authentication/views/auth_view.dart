@@ -1,6 +1,8 @@
 import 'package:animated_login/animated_login.dart';
 import 'package:ecommerce_app/config/theme/my_fonts.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:get/get.dart';
 import 'package:universal_image/universal_image.dart';
@@ -21,6 +23,14 @@ class AuthView extends GetView<AuthController> {
       body: Stack(
         children: [
           Obx(() => AnimatedLogin(
+                emailController: kDebugMode
+                    ? TextEditingController(
+                        text: dotenv.get('TEST_EMAIL', fallback: ''))
+                    : null,
+                passwordController: kDebugMode
+                    ? TextEditingController(
+                        text: dotenv.get('TEST_PASSWORD', fallback: ''))
+                    : null,
                 passwordValidator: ValidatorModel(
                   checkLowerCase: false,
                   checkUpperCase: false,

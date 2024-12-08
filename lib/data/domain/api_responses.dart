@@ -1,8 +1,8 @@
 // Models
 
+import 'package:ecommerce_app/app/data/models/cart_model.dart';
 import 'package:ecommerce_app/domain/address.dart';
 import 'package:ecommerce_app/domain/brand.dart';
-import 'package:ecommerce_app/domain/cart.dart';
 import 'package:ecommerce_app/domain/category.dart';
 import 'package:ecommerce_app/domain/country.dart';
 import 'package:ecommerce_app/domain/order.dart';
@@ -671,14 +671,14 @@ class CartRequest {
   factory CartRequest.fromJson(Map<String, dynamic> json) {
     return CartRequest(
       productId: json['product_id'] as int?,
-      quantity: json['quantity'] as int?,
+      quantity: json['qty'] as int?,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'product_id': productId,
-      'quantity': quantity,
+      'qty': quantity,
     };
   }
 }
@@ -1092,6 +1092,139 @@ class PaginationLink {
       'url': url,
       'label': label,
       'active': active,
+    };
+  }
+}
+
+class CartResponse {
+  final String id;
+  final int count;
+  final String totalPrice;
+  final Map<String, CartProductEntity> content;
+
+  CartResponse({
+    required this.id,
+    required this.count,
+    required this.totalPrice,
+    required this.content,
+  });
+
+  factory CartResponse.fromJson(Map<String, dynamic> json) {
+    return CartResponse(
+      id: json['id'],
+      count: json['count'],
+      totalPrice: json['total_price'],
+      content: (json['content'] as Map).map(
+          (key, value) => MapEntry(key, CartProductEntity.fromJson(value))),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'count': count,
+      'total_price': totalPrice,
+      'content': content.map((key, value) => MapEntry(key, value.toJson())),
+    };
+  }
+}
+
+class CartProductEntity {
+  final String rowId;
+  final int id;
+  final String name;
+  final int qty;
+  final double price;
+  final CartProductOptionsEntity options;
+  final double tax;
+  final double subtotal;
+  final String updatedAt;
+
+  CartProductEntity({
+    required this.rowId,
+    required this.id,
+    required this.name,
+    required this.qty,
+    required this.price,
+    required this.options,
+    required this.tax,
+    required this.subtotal,
+    required this.updatedAt,
+  });
+
+  factory CartProductEntity.fromJson(Map<String, dynamic> json) {
+    return CartProductEntity(
+      rowId: json['rowId'],
+      id: json['id'],
+      name: json['name'],
+      qty: json['qty'],
+      price: json['price'],
+      options: CartProductOptionsEntity.fromJson(json['options']),
+      tax: json['tax'],
+      subtotal: json['subtotal'],
+      updatedAt: json['updated_at'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'rowId': rowId,
+      'id': id,
+      'name': name,
+      'qty': qty,
+      'price': price,
+      'options': options.toJson(),
+      'tax': tax,
+      'subtotal': subtotal,
+      'updated_at': updatedAt,
+    };
+  }
+}
+
+class CartProductOptionsEntity {
+  final String image;
+  final String attributes;
+  final int taxRate;
+  final Map<String, int> taxClassesMap;
+  final List<dynamic> options;
+  final List<dynamic> extras;
+  final String sku;
+  final int weight;
+
+  CartProductOptionsEntity({
+    required this.image,
+    required this.attributes,
+    required this.taxRate,
+    required this.taxClassesMap,
+    required this.options,
+    required this.extras,
+    required this.sku,
+    required this.weight,
+  });
+
+  factory CartProductOptionsEntity.fromJson(Map<String, dynamic> json) {
+    return CartProductOptionsEntity(
+      image: json['image'],
+      attributes: json['attributes'] ?? '',
+      taxRate: json['taxRate'],
+      taxClassesMap: Map<String, int>.from(json['taxClasses']),
+      options: json['options'] ?? [],
+      extras: json['extras'] ?? [],
+      sku: json['sku'],
+      weight: json['weight'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'image': image,
+      'attributes': attributes,
+      'taxRate': taxRate,
+      'taxClasses': taxClassesMap,
+      'options': options,
+      'extras': extras,
+      'sku': sku,
+      'weight': weight,
     };
   }
 }

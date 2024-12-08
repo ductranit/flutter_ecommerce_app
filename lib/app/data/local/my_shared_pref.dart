@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class MySharedPref {
   // prevent making instance
@@ -49,4 +50,13 @@ class MySharedPref {
 
   /// clear all data from shared pref
   static Future<void> clear() async => await _sharedPreferences.clear();
+
+  static String deviceId() {
+    var id = _sharedPreferences.getString('device_id');
+    if (id == null) {
+      id = Uuid().v1();
+      _sharedPreferences.setString('device_id', id);
+    }
+    return id;
+  }
 }
