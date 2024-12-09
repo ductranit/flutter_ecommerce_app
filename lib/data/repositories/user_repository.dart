@@ -22,6 +22,15 @@ class UserRepository {
     return await restClient.getProfile();
   }
 
+  Future<UserProfileResponse> updateUserProfile(
+    String name,
+    String email,
+    String phone,
+  ) async {
+    return await restClient.updateProfile(
+        UpdateProfileRequest(name: name, email: email, phone: phone));
+  }
+
   Future<bool> logout() async {
     final response = await restClient.logout();
     return response.error != true;

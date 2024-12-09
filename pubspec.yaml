@@ -28,6 +28,8 @@ dependencies:
   collection:
   flutter_inappwebview:
   flutter_dotenv:
+  flutter_form_builder:
+  form_builder_validators:
 
   flutter: 
     sdk: flutter

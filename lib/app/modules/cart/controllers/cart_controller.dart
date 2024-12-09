@@ -16,7 +16,7 @@ class CartController extends GetxController {
     final cartId = await ProductService.to.checkout();
     if (cartId.isNotEmpty) {
       final checkoutUrl = dotenv.get('CHECKOUT_URL', fallback: '');
-      Get.toNamed('/checkout', arguments: '$checkoutUrl?cartId=$cartId');
+      Get.toNamed('/checkout', arguments: '$checkoutUrl/$cartId');
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/app/data/local/my_shared_pref.dart';
 import 'package:ecommerce_app/app/modules/checkout/controllers/checkout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,8 +21,11 @@ class CheckoutView extends GetView<CheckoutController> {
               Container(
                 padding: EdgeInsets.all(20.w),
                 child: InAppWebView(
-                  initialUrlRequest:
-                      URLRequest(url: WebUri(controller.checkoutUrl)),
+                  initialUrlRequest: URLRequest(
+                      url: WebUri(controller.checkoutUrl),
+                      headers: {
+                        'Authorization': 'Bearer ${MySharedPref.getAuthToken()}'
+                      }),
                   shouldOverrideUrlLoading:
                       (controller, navigationAction) async {
                     Get.find<Logger>()

@@ -79,6 +79,14 @@ class UserService extends GetxService {
     user.safeUpdate(response.data);
   }
 
+  Future<void> update() async {
+    await userRepository.updateUserProfile(
+      user.value?.name ?? '',
+      user.value?.email ?? '',
+      user.value?.phone ?? '',
+    );
+  }
+
   Future<void> logout() async {
     userRepository.logout();
     MySharedPref.removeAuthToken();
