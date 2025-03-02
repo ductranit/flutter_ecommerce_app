@@ -13,7 +13,7 @@ class CartController extends GetxController {
   /// when the user press on purchase now button
   onPurchaseNowPressed() async {
     // create cart order
-    final cartId = await ProductService.to.checkout();
+    final cartId = ProductService.to.cart.value.id;
     if (cartId.isNotEmpty) {
       final checkoutUrl = dotenv.get('CHECKOUT_URL', fallback: '');
       Get.toNamed('/checkout', arguments: '$checkoutUrl/$cartId');

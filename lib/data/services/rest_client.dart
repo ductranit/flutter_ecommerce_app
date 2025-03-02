@@ -87,14 +87,20 @@ abstract class RestClient {
   @POST("/api/v1/ecommerce/cart")
   Future<CartResponse> addToCart(@Body() CartRequest request);
 
+  @PUT("/api/v1/ecommerce/cart/{id}")
+  Future<CartResponse> updateProduct(
+      @Path("id") String id, @Body() CartRequest request);
+
   @POST("/api/v1/ecommerce/cart/refresh")
   Future<BaseResponse> refreshCart(@Body() CartRefreshRequest request);
 
   @GET("/api/v1/ecommerce/cart/{id}")
   Future<CartResponse> getCard(@Path('id') String id);
 
-  @POST("/api/v1/ecommerce/cart")
-  Future<CartResponse> createCart(@Body() CreateCartRequest request);
+  // Cart APIs
+  @DELETE("/api/v1/ecommerce/cart/{id}")
+  Future<CartResponse> removeProductFromCart(
+      @Path('id') String id, @Body() CartRequest request);
 
   // Orders APIs
   @GET("/api/v1/ecommerce/orders")

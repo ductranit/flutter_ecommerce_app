@@ -30,30 +30,43 @@ class ProductService extends GetxService {
     } else {
       cartItem.quantity += quantity;
     }
-
     refreshCart();
+    final response = await productRepository.addProductToCart(product.id!,
+        quantity: quantity);
+    cart.value = CartModel.fromResponse(response, allProducts);
   }
 
-  void refreshCart() {
-    cart.value.cartItems.removeWhere((item) => item.quantity <= 0);
+  Future<void> refreshCart({bool refresh = false}) async {
+    cart.value.cartItems
+        .removeWhere((item) => item.quantity <= 0 || item.product == null);
     cartPrice.value = cart.value.cartItems.isEmpty
         ? 0.0
         : cart.value.cartItems
-            .map((item) => item.product!.price! * item.quantity)
+            .map((item) => (item.product?.price ?? 0.0) * item.quantity)
             .reduce((value, element) => value + element);
+
+    if (refresh && cart.value.id.isNotEmpty) {
+      final response = await productRepository.refreshCard(cart.value);
+      cart.value = CartModel.fromResponse(response, allProducts);
+    }
   }
 
-  void removeFromCart(ProductModel product) {
+  Future<void> removeFromCart(ProductModel product) async {
+    cart.value.cartItems.removeWhere((item) => item.productId == product.id);
     refreshCart();
+    await productRepository.removeProductFromCart(cart.value, product.id ?? 0);
   }
 
-  void increaseCart(ProductModel product, int quantity) {
+  Future<void> increaseCart(ProductModel product, int quantity) async {
     final cartItem = cart.value.cartItems
         .firstWhereOrNull((item) => item.productId == product.id);
     if (cartItem != null) {
       cartItem.quantity += quantity;
     }
     refreshCart();
+    await productRepository.updateProduct(
+        cart.value, product.id ?? 0, cartItem?.quantity ?? 0);
+    refreshCart(refresh: true);
   }
 
   void decreaseCart(ProductModel product, int quantity) {
@@ -85,15 +98,5 @@ class ProductService extends GetxService {
 
   bool isFavorite(ProductModel product) {
     return favoriteProducts.any((item) => item.id == product.id);
-  }
-
-  Future<String> checkout() async {
-    final productIds =
-        cart.value.cartItems.map((item) => item.productId).toList();
-    final quantities =
-        cart.value.cartItems.map((item) => item.quantity).toList();
-    final response =
-        await productRepository.createCartCheckout(productIds, quantities);
-    return response.id;
   }
 }

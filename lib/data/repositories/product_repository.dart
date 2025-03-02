@@ -24,13 +24,28 @@ class ProductRepository {
     ));
   }
 
-  Future<CartResponse> refreshCard(CartModel cart) async {
-    return await restClient.getCard(cart.id);
+  Future<CartResponse> removeProductFromCart(
+    CartModel cart,
+    int productId,
+  ) async {
+    return await restClient.removeProductFromCart(
+        cart.id,
+        CartRequest(
+          productId: productId,
+        ));
   }
 
-  Future<CartResponse> createCartCheckout(
-      List<int> productIds, List<int> quantities) async {
-    return await restClient.createCart(
-        CreateCartRequest(productIds: productIds, quantities: quantities));
+  Future<CartResponse> updateProduct(
+      CartModel cart, int productId, int quantity) async {
+    return await restClient.updateProduct(
+        cart.id,
+        CartRequest(
+          productId: productId,
+          quantity: quantity,
+        ));
+  }
+
+  Future<CartResponse> refreshCard(CartModel cart) async {
+    return await restClient.getCard(cart.id);
   }
 }
