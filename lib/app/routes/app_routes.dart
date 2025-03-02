@@ -17,11 +17,13 @@ abstract class Routes {
   static const AUTH = _Paths.AUTH;
   static const PROFILE = _Paths.PROFILE;
   static const CHECKOUT = _Paths.CHECKOUT;
+  static const START = _Paths.START;
 }
 
 abstract class _Paths {
   _Paths._();
   static const SPLASH = '/splash';
+  static const START = '/start';
   static const BASE = '/base';
   static const HOME = '/home';
   static const FAVORITES = '/favorites';

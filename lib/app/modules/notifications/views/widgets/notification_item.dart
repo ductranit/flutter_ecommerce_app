@@ -15,7 +15,7 @@ class NotificationItem extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 5.h),
       margin: EdgeInsets.only(bottom: 15.h),
       decoration: BoxDecoration(
-        color: theme.primaryColor.withOpacity(0.1),
+        color: theme.primaryColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(15.r),
       ),
       child: ListTile(

@@ -66,14 +66,14 @@ class CustomButton extends StatelessWidget {
               border: Border.all(color: borderColor ?? Colors.transparent),
               color: !disabled
                   ? backgroundColor ?? Get.theme.primaryColor
-                  : Get.theme.primaryColor.withOpacity(0.5),
+                  : Get.theme.primaryColor.withValues(alpha: 0.5),
               gradient: gradient,
               boxShadow: !hasShadow || disabled
                   ? null
                   : [
                       BoxShadow(
                         color: (shadowColor ?? Colors.black)
-                            .withOpacity(shadowOpacity),
+                            .withValues(alpha: shadowOpacity),
                         spreadRadius: shadowSpreadRadius,
                         blurRadius: shadowBlurRadius,
                         offset: const Offset(0, 2),

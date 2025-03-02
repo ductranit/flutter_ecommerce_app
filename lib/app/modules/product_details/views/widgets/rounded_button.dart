@@ -23,7 +23,7 @@ class RoundedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF0FDA89).withOpacity(0.3),
+              color: const Color(0xFF0FDA89).withValues(alpha: 0.3),
               blurRadius: 4,
               spreadRadius: 0,
               offset: const Offset(0, 2),

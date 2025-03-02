@@ -41,7 +41,7 @@ class SettingsItem extends StatelessWidget {
               builder: (controller) => CupertinoSwitch(
                 value: !controller.isLightTheme,
                 onChanged: controller.changeTheme,
-                activeColor: theme.primaryColor,
+                activeTrackColor: theme.primaryColor,
               ),
             )
           : Container(

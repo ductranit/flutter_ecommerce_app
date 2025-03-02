@@ -81,7 +81,7 @@ class CartView extends GetView<CartController> {
                             style: theme.textTheme.displayLarge?.copyWith(
                               decoration: TextDecoration.underline,
                               decorationColor:
-                                  theme.primaryColor.withOpacity(0.5),
+                                  theme.primaryColor.withValues(alpha: 0.5),
                               decorationThickness: 1,
                               color: Colors.transparent,
                               shadows: [
