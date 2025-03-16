@@ -39,7 +39,7 @@ class ProductItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(25.r),
                       child: UniversalImage(
-                        product.image!,
+                        product.image ?? '',
                         height: 200.h,
                         fit: BoxFit.cover,
                       ).animate().slideX(
@@ -94,7 +94,7 @@ class ProductItem extends StatelessWidget {
             ),
             10.verticalSpace,
             AutoSizeText(
-              product.name!,
+              product.name ?? '',
               style: theme.textTheme.bodyMedium,
               minFontSize: 7,
               maxLines: 2,

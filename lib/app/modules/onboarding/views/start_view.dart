@@ -84,7 +84,7 @@ class StartView extends GetView<OnboardingController> {
               20.verticalSpace,
               CustomButton(
                 text: "Let's Get Started".tr,
-                onPressed: () {},
+                onPressed: () => Get.toNamed(Routes.BASE),
                 fontSize: 16.sp,
                 radius: 12.r,
                 verticalPadding: 12.h,

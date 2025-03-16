@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:universal_image/universal_image.dart';
 
 import '../controllers/base_controller.dart';
-import '../../cart/views/cart_view.dart';
 import '../../favorites/views/favorites_view.dart';
 import '../../home/views/home_view.dart';
 import '../../settings/views/settings_view.dart';
@@ -25,9 +24,8 @@ class BaseView extends GetView<BaseController> {
             index: controller.currentIndex,
             children: const [
               HomeView(),
-              FavoritesView(),
-              CartView(),
               CaetgoriesView(),
+              FavoritesView(),
               SettingsView()
             ],
           ),
@@ -56,29 +54,26 @@ class BaseView extends GetView<BaseController> {
             child: BottomNavigationBar(
               currentIndex: controller.currentIndex,
               type: BottomNavigationBarType.fixed,
-              elevation: 0.0,
+              elevation: 10.0,
               backgroundColor: theme.scaffoldBackgroundColor,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
               selectedFontSize: 0.0,
+              selectedLabelStyle: theme.textTheme.bodySmall,
+              unselectedLabelStyle: theme.textTheme.bodySmall,
               items: [
                 _mBottomNavItem(
                   label: 'Home'.tr,
                   iconData: Icons.store,
                 ),
+                _mBottomNavItem(label: 'Category'.tr, iconData: Icons.menu),
                 _mBottomNavItem(
-                  label: 'Favorites'.tr,
-                  iconData: Icons.favorite,
+                  label: 'Wistlist'.tr,
+                  iconData: Icons.favorite_border_outlined,
                 ),
                 _mBottomNavItem(
-                  label: 'Cart'.tr,
-                  iconData: Icons.shopping_cart,
-                ),
-                _mBottomNavItem(
-                    label: 'Categories'.tr, iconData: Icons.category),
-                _mBottomNavItem(
-                  label: 'Settings'.tr,
-                  iconData: Icons.settings,
+                  label: 'Profile'.tr,
+                  iconData: Icons.person,
                 ),
               ],
               onTap: controller.changeScreen,
