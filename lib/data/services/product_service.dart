@@ -1,20 +1,30 @@
 import 'package:ecommerce_app/app/data/models/cart_model.dart';
+import 'package:ecommerce_app/app/data/models/category_model.dart';
 import 'package:ecommerce_app/app/data/models/product_model.dart';
+import 'package:ecommerce_app/data/repositories/category_repository.dart';
 import 'package:ecommerce_app/data/repositories/product_repository.dart';
 import 'package:get/get.dart';
 
 class ProductService extends GetxService {
   static ProductService get to => Get.find();
   final productRepository = Get.find<ProductRepository>();
+  final categoryRepository = Get.find<CategoryRepository>();
 
   final favoriteProducts = <ProductModel>[].obs;
   var allProducts = <ProductModel>[].obs;
   final cartPrice = 0.0.obs;
   final cart = CartModel().obs;
+  final allCategories = <CategoryModel>[].obs;
 
   Future<void> loadProducts() async {
     final response = await productRepository.getProducts();
     allProducts.value = response.map((e) => ProductModel.from(e)).toList();
+  }
+
+  Future<void> loadCategories() async {
+    final response = await categoryRepository.getAllCategories();
+    final list = response.map((e) => CategoryModel.from(e)).toList();
+    allCategories.value = CategoryModel.organizeCategories(list);
   }
 
   Future<void> addToCart(ProductModel product, int quantity) async {

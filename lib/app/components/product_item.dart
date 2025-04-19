@@ -5,9 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:universal_image/universal_image.dart';
 
-import '../../utils/constants.dart';
 import '../data/models/product_model.dart';
-import '../modules/base/controllers/base_controller.dart';
 import '../routes/app_pages.dart';
 
 class ProductItem extends StatelessWidget {
@@ -25,71 +23,64 @@ class ProductItem extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 220.h,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEDF1FA),
-                    borderRadius: BorderRadius.circular(25.r),
-                  ),
                 ),
                 Positioned(
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25.r),
-                      child: UniversalImage(
-                        product.image ?? '',
-                        height: 200.h,
-                        fit: BoxFit.cover,
-                      ).animate().slideX(
-                            duration: const Duration(milliseconds: 200),
-                            begin: 1,
-                            curve: Curves.easeInSine,
-                          ),
-                    ),
+                    child: UniversalImage(
+                      product.image ?? '',
+                      height: 200.h,
+                      fit: BoxFit.cover,
+                    ).animate().slideX(
+                          duration: const Duration(milliseconds: 200),
+                          begin: 1,
+                          curve: Curves.easeInSine,
+                        ),
                   ),
                 ),
-                Positioned(
-                  left: 15.w,
-                  bottom: 20.h,
-                  child: GetBuilder<BaseController>(
-                    id: 'FavoriteButton',
-                    builder: (controller) => GestureDetector(
-                      onTap: () => controller.onFavoriteButtonPressed(product),
-                      child: CircleAvatar(
-                        radius: 18.r,
-                        backgroundColor: Colors.white,
-                        child: UniversalImage(
-                          controller.isFavorite(product)
-                              ? Constants.favFilledIcon
-                              : Constants.favOutlinedIcon,
-                          color: controller.isFavorite(product)
-                              ? null
-                              : theme.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ).animate().fade(),
-                Positioned(
-                  right: 15.w,
-                  bottom: 20.h,
-                  child: GetBuilder<BaseController>(
-                    id: 'CardButton',
-                    builder: (controller) => GestureDetector(
-                      onTap: () => controller.addToCart(product, 1),
-                      child: CircleAvatar(
-                        radius: 18.r,
-                        backgroundColor: Colors.white,
-                        child: UniversalImage(
-                          Icons.shopping_cart,
-                          color: theme.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ).animate().fade(),
+                // Positioned(
+                //   left: 15.w,
+                //   bottom: 20.h,
+                //   child: GetBuilder<BaseController>(
+                //     id: 'FavoriteButton',
+                //     builder: (controller) => GestureDetector(
+                //       onTap: () => controller.onFavoriteButtonPressed(product),
+                //       child: CircleAvatar(
+                //         radius: 18.r,
+                //         backgroundColor: Colors.white,
+                //         child: UniversalImage(
+                //           controller.isFavorite(product)
+                //               ? Constants.favFilledIcon
+                //               : Constants.favOutlinedIcon,
+                //           color: controller.isFavorite(product)
+                //               ? null
+                //               : theme.primaryColor,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ).animate().fade(),
+                // Positioned(
+                //   right: 15.w,
+                //   bottom: 20.h,
+                //   child: GetBuilder<BaseController>(
+                //     id: 'CardButton',
+                //     builder: (controller) => GestureDetector(
+                //       onTap: () => controller.addToCart(product, 1),
+                //       child: CircleAvatar(
+                //         radius: 18.r,
+                //         backgroundColor: Colors.white,
+                //         child: UniversalImage(
+                //           Icons.shopping_cart,
+                //           color: theme.primaryColor,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ).animate().fade(),
               ],
             ),
             10.verticalSpace,

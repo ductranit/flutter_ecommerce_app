@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final products = ProductService.to.allProducts;
+  final categories = ProductService.to.allCategories;
+  var currentPage = 0.obs;
   @override
   void onInit() {
     getProducts();
@@ -11,5 +13,6 @@ class HomeController extends GetxController {
 
   getProducts() async {
     ProductService.to.loadProducts();
+    ProductService.to.loadCategories();
   }
 }
