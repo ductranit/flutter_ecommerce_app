@@ -62,6 +62,7 @@ class HomeView extends GetView<HomeController> {
   }
 
   List<Widget> _buildFlashSale(BuildContext context) {
+    if (controller.products.isEmpty) return [];
     final theme = context.theme;
     return [
       Row(
@@ -132,6 +133,7 @@ class HomeView extends GetView<HomeController> {
   List<Widget> _buildCategoryList(
       BuildContext context, CategoryModel category) {
     final theme = context.theme;
+    if (controller.products.isEmpty) return [];
     return [
       Row(
         children: [
