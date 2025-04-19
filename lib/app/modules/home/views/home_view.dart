@@ -219,7 +219,19 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() => Column(children: [
-            TopBar(title: ''),
+            TopBar(
+              title: '',
+              actions: [
+                GestureDetector(
+                  onTap: () {},
+                  child: UniversalImage('assets/images/bell.svg'),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: UniversalImage('assets/images/bell.svg'),
+                ),
+              ],
+            ),
             Expanded(
                 child: Container(
               padding: EdgeInsets.symmetric(horizontal: 0.w),

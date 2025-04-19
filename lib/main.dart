@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/app/modules/base/bindings/service_binding.dart';
 import 'package:ecommerce_app/app/translations.dart';
+import 'package:ecommerce_app/config/theme/light_theme_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,6 +14,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   await MySharedPref.init();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor:
+          LightThemeColors.appBarColor, // Set your desired color here
+      statusBarIconBrightness: Brightness.light, // For Android (dark icons)
+      statusBarBrightness: Brightness.dark, // For iOS (dark icons)
+    ),
+  );
 
   runApp(
     ScreenUtilInit(

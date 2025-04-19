@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class CategoriesController extends GetxController {
   var categories = <CategoryModel>[].obs;
   final categoryRepository = Get.find<CategoryRepository>();
+  var selectedCategoryIndex = (-1).obs;
 
   @override
   void onInit() {

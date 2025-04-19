@@ -15,4 +15,11 @@ extension $RxList<T> on RxList<T> {
       this.value = value;
     });
   }
+
+  T? tryGet(int index) {
+    // ignore: invalid_use_of_protected_member
+    if (index < 0 || index >= value.length) return null;
+    // ignore: invalid_use_of_protected_member
+    return value[index];
+  }
 }
