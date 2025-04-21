@@ -1,9 +1,11 @@
 import 'package:ecommerce_app/app/data/models/cart_model.dart';
 import 'package:ecommerce_app/app/data/models/category_model.dart';
 import 'package:ecommerce_app/app/data/models/product_model.dart';
+import 'package:ecommerce_app/data/domain/api_responses.dart';
 import 'package:ecommerce_app/data/repositories/category_repository.dart';
 import 'package:ecommerce_app/data/repositories/product_repository.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class ProductService extends GetxService {
   static ProductService get to => Get.find();
@@ -15,6 +17,7 @@ class ProductService extends GetxService {
   final cartPrice = 0.0.obs;
   final cart = CartModel().obs;
   final allCategories = <CategoryModel>[].obs;
+  var currentCartId = '';
 
   Future<void> loadProducts() async {
     final response = await productRepository.getProducts();
@@ -41,9 +44,19 @@ class ProductService extends GetxService {
       cartItem.quantity += quantity;
     }
     refreshCart();
-    final response = await productRepository.addProductToCart(product.id!,
-        quantity: quantity);
-    cart.value = CartModel.fromResponse(response, allProducts);
+    if (currentCartId.isEmpty) {
+      final response = await productRepository.addProductToCart(product.id!,
+          quantity: quantity);
+      cart.value = CartModel.fromResponse(response, allProducts);
+      currentCartId = cart.value.id;
+      refreshCart(refresh: true);
+    } else {
+      await productRepository.updateProduct(
+          cart.value, product.id ?? 0, quantity);
+      refreshCart(refresh: true);
+    }
+
+    Get.find<Logger>().i('add product ${product.id} to cart ${cart.value.id}');
   }
 
   Future<void> refreshCart({bool refresh = false}) async {

@@ -1182,7 +1182,7 @@ class CartProductEntity {
       id: json['id'],
       name: json['name'],
       qty: json['qty'],
-      price: json['price'],
+      price: json['price'].toDouble(),
       options: CartProductOptionsEntity.fromJson(json['options']),
       tax: json['tax'],
       subtotal: json['subtotal'],

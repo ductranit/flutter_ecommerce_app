@@ -3,6 +3,7 @@ import 'package:ecommerce_app/app/components/product_item.dart';
 import 'package:ecommerce_app/app/components/top_bar.dart';
 import 'package:ecommerce_app/app/data/models/category_model.dart';
 import 'package:ecommerce_app/app/modules/home/controllers/home_controller.dart';
+import 'package:ecommerce_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -223,8 +224,8 @@ class HomeView extends GetView<HomeController> {
               title: '',
               actions: [
                 GestureDetector(
-                  onTap: () {},
-                  child: UniversalImage('assets/images/bell.svg'),
+                  onTap: () => Get.toNamed(Routes.CART),
+                  child: UniversalImage('assets/images/shopping-bag-solid.svg'),
                 ),
                 GestureDetector(
                   onTap: () {},
